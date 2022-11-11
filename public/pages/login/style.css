@@ -1,0 +1,79 @@
+/* Login / Cadastro */
+
+#form_box {
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b58fff;
+  margin-bottom: 90px;
+}
+
+#form_box .form_box2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f1faee;
+  border: 4px solid #b58fff;
+  border-radius: 40px;
+  width: 500px;
+}
+
+.imglogin {
+  margin-top: 90px;
+  width: 400px;
+  margin-left: 100px;
+}
+
+#form_box .form_box2 p {
+  margin-top: 20px;
+}
+
+#form_box .form_box2 h2 {
+  margin-top: 20px;
+}
+
+#form_box .form_box2 button {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  color: white;
+  background-color: #9c71f3;
+  font-size: 15px;
+  width: 180px;
+  height: 40px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+#form_box .form_box2 button:hover {
+  background-color: #9c71f3ba;
+}
+
+#form_box .form_box2 input {
+  border-color: #b58fff;
+  border: none;
+  border-bottom: 3px solid;
+  padding: 5px;
+  color: #b58fff;
+  font-size: 20px;
+  width: 35%;
+  text-align: center;
+  height: 25px;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+#form_box .form_box2 input:focus {
+  outline: none;
+}
+
+#form_box a {
+  margin-bottom: 20px;
+  color: #b58fff;
+}
+
+@media screen and (max-width: 1250px) {
+  
+}

@@ -1,0 +1,44 @@
+.buttonNavgation {
+  cursor: pointer;
+  width: 200px;
+  padding: 5px;
+  text-align: center;
+  margin-left: 10px;
+  border-radius: 8px;
+  background-color: #240046;
+}
+.buttonNavgation a {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+
+.buttonRegister {
+  cursor: pointer;
+  width: 200px;
+  padding: 5px;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 4px solid #b58fff;
+  border-radius: 8px;
+  background-color: #b58fff;
+  transition: all 0.2s;
+}
+.buttonRegister a {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+.buttonRegister:hover {
+  border: 4px solid #b58fff;
+  background-color: transparent;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 800px){
+  .buttonNavgation {
+    margin-right: 10px;
+  }
+}

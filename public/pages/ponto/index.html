@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="../../src/components/NavBar/style.css" />
+    <link rel="stylesheet" href="../../src/Global/style.css" />
+    <link rel="stylesheet" href="../../src/components/Button/style.css" />
+    <link rel="stylesheet" href="../../src/components/Footer/style.css" />
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <title>SA Ponto | Espelho de ponto</title>
+</head>
+<body>
+    <div class="navigation">
+        <div class="menuToggle"></div>
+        <ul>
+            <li class="list active">
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="podium"></ion-icon>
+                    </span>
+                    <span class="text">Dados</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list active">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="alarm"></ion-icon>
+                    </span>
+                    <span class="text">Ponto</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list">
+                <a >
+                    <span class="icon">
+                        <ion-icon name="people"></ion-icon>
+                    </span>
+                    <span class="text">Usuarios</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list" >
+                <a>
+                    <span class="icon">
+                        <ion-icon name="power"></ion-icon>
+                    </span>
+                    <span class="text">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="title">
+        <h1>Apuração de ponto</h1>
+        <button id="donwload_relatorio">Baixar relatório</button>
+    </div>
+
+    <div id="box_infos">
+        <div id="tabela_ponto">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Dia</td>
+                        <td>Entrada</td>
+                        <td>Saída</td>
+                        <td>Hora extra</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>25 NOV - SEX</td>
+                        <td>8:00</td>
+                        <td>18:00</td>
+                        <td>1h</td>
+                    </tr>
+                    <tr>
+                        <td>24 NOV - QUI</td>
+                        <td>8:00</td>
+                        <td>18:00</td>
+                        <td>1h</td>
+                    </tr>
+                    <tr>
+                        <td>23 NOV - QUA</td>
+                        <td>8:00</td>
+                        <td>18:00</td>
+                        <td>1h</td>
+                    </tr>
+                    <tr>
+                        <td>22 NOV - TER</td>
+                        <td>8:00</td>
+                        <td>18:00</td>
+                        <td>1h</td>
+                    </tr>
+                    <tr>
+                        <td>21 NOV - SEG</td>
+                        <td>8:00</td>
+                        <td>18:00</td>
+                        <td>1h</td>
+                    </tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="filter_and_info">
+            <div id="filter">
+                    <h2>Periodo</h2>
+                  <section class="date_filter">
+                        <input type="date" id="reference_date">
+                        <h3>à</h3>
+                        <input type="date" id="final_date">
+                  </section>
+                  <button id="date_filter">Filtrar</button>
+            </div>
+
+            <div id="total_trabalhado">
+                <h2>Total horas trabalhadas:</h2>
+                <p><span id="gap_total">176h</span>/<span id="total_horas">176h</span></p>
+            </div>
+
+            <div id="total_extra">
+                <h2>Total de horas extra:</h2>
+                <p><span id="horas_extra_total">5h</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+</body>
+</html>
+<script src="../../src/components/Footer/index.js"></script>
+<script src="./header-buttons.js"></script>

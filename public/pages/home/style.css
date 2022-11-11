@@ -1,0 +1,204 @@
+#header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 500px;
+  padding-top: 120px;
+}
+#header p {
+  font-weight: 700;
+  font-size: 35px;
+  color: #b58fff;
+}
+
+.imagem_header {
+  width: 400px;
+}
+
+/* PARTES DE MISSAO VISAO E VALORES */
+#objetivos {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #b58fff;
+}
+
+#objetivos h3 {
+  font-size: 30px;
+}
+
+#objetivos img {
+  height: 200px;
+}
+
+.card_obj {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/*PARTES DA PARTE DE CONTATO*/
+#contato {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.container h2 {
+  color: #b58fff;
+  width: 65%;
+  margin-top: 30px;
+  text-align: center;
+}
+.container label {
+  color: #b58fff;
+  margin: 5px;
+  font-weight: 600;
+}
+.container input {
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  height: 60px;
+  font-size: 20px;
+  font-weight: 600;
+  width: 80%;
+  padding: 3px 5px;
+  text-align: center;
+}
+
+.container textarea {
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: 600;
+  width: 80%;
+  padding: 3px 5px;
+  text-align: center;
+}
+.container .mensagem {
+  height: 20%;
+  padding: 10px;
+}
+.container button {
+  width: 200px;
+  height: 60px;
+  margin: 5%;
+  border-radius: 10px;
+  border: none;
+  background-color: #b58fff;
+  transition: all 0.2s;
+}
+.container button:hover {
+  margin: 5%;
+  border-radius: 10px;
+  background-color: #9c71f3;
+  color: #fff;
+  cursor: pointer;
+}
+
+.m3 {
+  margin: 100px;
+}
+
+.card_obj h3 {
+  font-size: 60px !important;
+}
+
+#newEmpresa{
+  color: white;
+  justify-content: space-between;
+  font-size: 35px;
+}
+
+
+/* RESPONSIVIDADE */
+@media only screen and (min-width: 300px) and (max-width: 800px) {
+  #header {
+    padding-top: 250px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .card_obj h3 {
+    margin-top: 20px;
+  }
+  .card_obj p {
+    font-size: 18px;
+  }
+
+  .card_obj img {
+    margin-right: 20px;
+  }
+
+  #newEmpresa{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .imagem_header {
+    width: 300px; 
+  }
+
+  #header p {
+    font-size: 25px;
+    text-align: center;
+  }
+
+  #objetivos {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  #contato {
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+  }
+  .container input {
+    width: 50%;
+  }
+
+ 
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1250px) {
+  #header {
+    padding-top: 250px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .imagem_header {
+    width: 400px;
+    margin-top: 10px;
+  }
+
+  #newEmpresa{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #header p {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  
+
+  #objetivos {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}

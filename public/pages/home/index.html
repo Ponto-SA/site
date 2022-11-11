@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="shortcut icon"
+      href="../../src/assets/phone.svg"
+      type="image/x-icon"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../src/components/NavBar/style.css" />
+    <link rel="stylesheet" href="../../src/Global/style.css" />
+    <link rel="stylesheet" href="../../src/components/Button/style.css" />
+    <link rel="stylesheet" href="../../src/components/Footer/style.css" />
+    <link rel="stylesheet" href="../../src/Global/preloader.css" />
+    <script src="../../src/Global/preloader.js"></script>
+
+    <title>SA Ponto</title>
+  </head>
+  <body>
+    <div id="preloader">
+      <div class="inner">
+        <!-- HTML DA ANIMAÇÃO MUITO LOUCA DO SEU PRELOADER! -->
+        <div class="bolas">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <div id="navbar"></div>
+    <div id="header">
+      <div>
+        <p>
+          A .SA é uma empresa que
+          <br />
+          trás soluções em <br />
+          monitoramento de <br />
+          hardware e gestão de tempo.
+        </p>
+      </div>
+      <div>
+        <img
+          src="../../src/assets/logo_header.svg"
+          class="imagem_header"
+          alt=""
+        />
+      </div>
+    </div>
+    <img style="margin-top: 190px" src="../../src/assets/wave.svg" alt="" />
+    <div id="objetivos">
+      <div class="card_obj">
+        <img
+          src="../../src/assets/developer.svg"
+          class="imagem_header"
+          alt=""
+        />
+        <h3>Missão</h3>
+        <p>
+          Nossa missão é facilitar <br />
+          a vida dos dev’s em home <br />
+          office com uma ferramenta <br />
+          de monitoramento de hardware <br />
+          e gestão de tempo
+        </p>
+      </div>
+      <div class="card_obj">
+        <img
+          src="../../src/assets/logo_visao.svg"
+          class="imagem_header"
+          alt=""
+        />
+        <h3>Visão</h3>
+        <p>
+          Nossa visão é atingir a <br />
+          comunidade de dev’s e tornar <br />
+          nossa ferramenta util na <br />
+          rotina dos mesmos
+        </p>
+      </div>
+      <div class="card_obj">
+        <img
+          src="../../src/assets/logo_valores.svg"
+          class="imagem_header"
+          alt=""
+        />
+        <h3>Valores</h3>
+        <p>
+          Nós iremos apenas monitorar <br />
+          os recursos do seu pc ok? <br />
+          Nossa equipe preza pela <br />
+          liberdade e privacidade de todos
+        </p>
+      </div>
+    </div>
+    <img src="../../src/assets/wave1.svg" alt="" />
+    <div id="newEmpresa" class="center m3">
+      <div class="card_obj">
+        <img
+          src="../../src/assets/undraw_co-working_re_w93t.svg"
+          class="imagem_header"
+          alt=""
+        />
+      </div>
+      <div class="card_obj">
+        <h3>Olá!</h3>
+        <p>
+          Traga sua empresa para fazer parte do nosso sistema. Cadastre agora
+          mesmo e tenha 30 dias grátis.
+        </p>
+        <div class="btnCadastro"></div>
+      </div>
+    </div>
+    <img src="../../src/assets/wave2.svg" alt="" />
+    <div id="contato">
+      <form
+        class="container"
+        action="https://formsubmit.co/Gabrielmirandamello9@gmail.com"
+        method="POST"
+      >
+        <label for="">NOME:</label>
+        <input
+          id="nomeMessage"
+          type="text"
+          name="name"
+          placeholder="Digite seu Nome"
+          required
+        />
+        <label for="">E-MAIL:</label>
+        <input
+          id="emailMessage"
+          type="text"
+          name="email"
+          placeholder="Digite seu Email"
+          required
+        />
+        <label for="">TELEFONE:</label>
+        <input
+          id="phoneMessage"
+          type="text"
+          placeholder="Digite seu Telefone"
+          required
+        />
+        <label for="">MENSAGEM:</label>
+        <textarea
+          name=""
+          id="mensagemSend"
+          required
+          class="mensagem"
+          name="message"
+          cols="30"
+          rows="5"
+          placeholder="Digite aqui a sua Mensagem"
+        ></textarea>
+        <input
+          type="hidden"
+          name="_next"
+          value="http://localhost:3333/index.html"
+        />
+        <input type="hidden" name="_template" value="box" />
+        <button type="submit" required onclick="sendEmail()">
+          Enviar Mensagem
+        </button>
+      </form>
+      <div class="container">
+        <img
+          class="imagem_header"
+          src="../../src/assets/undraw_collaborators.svg"
+          alt=""
+        />
+        <h2>
+          Entre em contato conosco para mais duvidas e saber mais sobre o nosso
+          produto, teremos o prazer em atendê-lo !
+        </h2>
+      </div>
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>
+<script src="../../src/components/NavBar/script.js"></script>
+<script src="../../src/components/Button/index.js"></script>
+<script src="../../src/components/Footer/index.js"></script>
+<!-- SCRIPT -->
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+  integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+  crossorigin="anonymous"
+></script>
+<script>
+  function sendEmail() {}
+</script>

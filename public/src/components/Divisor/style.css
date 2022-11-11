@@ -1,0 +1,17 @@
+.divisor{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 1px;
+    background-color: #6531ce69;
+    width: 70%;
+    margin-top: 50px;
+}
+
+.divisor label {
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 5px;
+ color: rgba(0, 0, 0, 0.462);
+
+}

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../src/assets/phone.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../src/components/NavBar/style.css" />
+    <link rel="stylesheet" href="../../src/Global/style.css" />
+    <link rel="stylesheet" href="../../src/components/Button/style.css" />
+    <link rel="stylesheet" href="../../src/components/Footer/style.css" />
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="../../src/Global/preloader.css">
+    <script src="../../src/Global/preloader.js"></script>
+
+    <title>SA Ponto</title>
+</head>
+
+<body id="body">
+    <div id="preloader">
+        <div class="inner">
+           <!-- HTML DA ANIMAÇÃO MUITO LOUCA DO SEU PRELOADER! -->
+           <div class="bolas">
+              <div></div>
+              <div></div>
+              <div></div>                    
+           </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="menuToggle"></div>
+        <ul>
+            <li class="list active">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="podium" onclick="iconeDados()"></ion-icon>
+                    </span>
+                    <span class="text" onclick="iconeDados()">Dados</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list active">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="alarm" onclick="iconePonto()"></ion-icon>
+                    </span>
+                    <span class="text" onclick="iconePonto()">Ponto</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="people" onclick="iconeUser()"></ion-icon>
+                    </span>
+                    <span class="text"  onclick="iconeUser()">Usuarios</span>
+                </a>
+            </li>
+        </ul>
+          <ul>
+            <li class="list">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="tv" onclick="iconeDevice()"></ion-icon>
+                    </span>
+                    <span class="text"  onclick="iconeUser()">Usuarios</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="power" onclick="logout()"></ion-icon>
+                    </span>
+                    <span class="text" onclick="logout()">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="chartBox">
+        <div id="title">
+            <h2 id="toTheTop">Métricas de uso - Hardware</h2>
+            <div id="filterUsers">
+                <label for="selectUser">Selecione o Colaborador</label>
+                <select id="selectUser" aria-placeholder="-- Selecione --">
+                    <option value="">Gabriel</option>
+                    <option value="">Yucatan</option>
+                    <option value="">Lukas</option>
+                    <option value="">Jeferson</option>
+                    <option value="">Matheus</option>
+                    <option value="">Yohan</option>
+                </select>
+            </div>
+        </div>
+        <div id="chartBox_line">
+            <div class="data_box">
+                <div style="width: 200px">
+                    <canvas id="cpuChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>CPU</h3>
+                    <p>40%</p>
+                </div>
+            </div>
+            <div class="data_box">
+                <div style="width: 200px">
+                    <canvas id="ramChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>RAM</h3>
+                    <p>40%</p>
+                    <b>8.0/16.0GB</b>
+                </div>
+            </div>
+            <div class="data_box">
+                <div style="width: 200px">
+                    <canvas id="gpuChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3 title="Memória consumida por processos">RAM PROC</h3>
+                    <p>15%</p>
+                    <b>2.5/16.0GB</b>
+                </div>
+            </div>
+        </div>
+        <div id="chartBox_line2">
+            <div class="data_box">
+                <div style="width: 200px">
+                    <canvas id="cpuTempChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>CPU TEMP.</h3>
+                    <p>43°C</p>
+                </div>
+            </div>
+            <div class="data_box">
+                <div style="width: 200px">
+                    <canvas id="discChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>DISCO (C:)</h3>
+                    <p>25%</p>
+                    <b>60/240GB</b>
+                </div>
+            </div>
+            <div class="data_box">
+                <div style="width: 200px">
+                    <canvas id="disc2Chart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>DISCO (E:)</h3>
+                    <p>50%</p>
+                    <b>250/500GB</b>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chartBox2">
+        <h2>Histórico de uso - Hardware</h2>
+        <div id="hist_chart">
+            <div style="width: 65%">
+                <canvas id="cpuHistChart"></canvas>
+            </div>
+            <select id="hist_filter">
+                <option value="hoje">Hoje</option>
+                <option value="umaSemana">1 semana</option>
+                <option value="duasSemanas">2 semanas</option>
+                <option value="quatroSemanas">4 semanas</option>
+            </select>
+        </div>
+
+        <div id="hist_chart">
+            <div style="width: 65%">
+                <canvas id="ramHistChart"></canvas>
+            </div>
+            <select id="hist_filter">
+                <option value="hoje">Hoje</option>
+                <option value="umaSemana">1 semana</option>
+                <option value="duasSemanas">2 semanas</option>
+                <option value="quatroSemanas">4 semanas</option>
+            </select>
+        </div>
+
+        <div id="hist_chart">
+            <div style="width: 65%">
+                <canvas id="RamProcHistChart"></canvas>
+            </div>
+            <select id="hist_filter">
+                <option value="hoje">Hoje</option>
+                <option value="umaSemana">1 semana</option>
+                <option value="duasSemanas">2 semanas</option>
+                <option value="quatroSemanas">4 semanas</option>
+            </select>
+        </div>
+
+        <div id="hist_chart">
+            <div style="width: 65%">
+                <canvas id="discHistChart"></canvas>
+            </div>
+            <div class="select_box">
+                <select id="hist_filter">
+                    <option value="hoje">Hoje</option>
+                    <option value="umaSemana">1 semana</option>
+                    <option value="duasSemanas">2 semanas</option>
+                    <option value="quatroSemanas">4 semanas</option>
+                </select>
+                <select id="disc_select">
+                    <option value="disco1">Disco C</option>
+                    <option value="disco2">Disco E</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="telaDePonto" style="display: none;">
+        <div id="title">
+            <h2>Apuração de ponto</h2>
+            <button id="donwload_relatorio">Baixar relatório</button>
+        </div>
+
+        <div id="box_infos">
+            <div id="filter_and_info">
+                <div id="filter_up">
+                    <p>Data inicial: <input type="date" id="date_input"></p>
+                    <p>Data final: <input type="date" id="date_input"></p>
+                    <button>Filtrar</button>
+                </div>
+                <div id="filter_down">
+                    <p id="hr_total">Total de horas: <span id="hr_t">83:00 hrs</span></p>
+                    <p id="hr_extra">Horas extras: <span id="hr_e">3:00 hrs</span></p>
+                </div>
+            </div>
+            <div>
+                <h2>Dias Filtrados</h2>
+            </div>
+            <div id="tabela_ponto">
+                <table>
+                    <thead>
+                        <tr>
+                            <td id="registro">Dia</td>
+                            <td id="registro">Entrada</td>
+                            <td id="registro">Saída</td>
+                            <td id="registro">Hora extra</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>25 NOV - SEX</td>
+                            <td>8:00</td>
+                            <td>18:00</td>
+                            <td>1h</td>
+                        </tr>
+                        <tr>
+                            <td>24 NOV - QUI</td>
+                            <td>8:00</td>
+                            <td>18:00</td>
+                            <td>1h</td>
+                        </tr>
+                        <tr>
+                            <td>23 NOV - QUA</td>
+                            <td>8:00</td>
+                            <td>18:00</td>
+                            <td>1h</td>
+                        </tr>
+                        <tr>
+                            <td>22 NOV - TER</td>
+                            <td>8:00</td>
+                            <td>18:00</td>
+                            <td>1h</td>
+                        </tr>
+                        <tr>
+                            <td>21 NOV - SEG</td>
+                            <td>8:00</td>
+                            <td>18:00</td>
+                            <td>1h</td>
+                        </tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="telaDeUsuarios" style="display: none;">
+        <div id="containerAcesso">
+            <div id="newUser">
+                <h2>Acessos:</h2>
+                <button id="myBtn">Novo Usuario</button>
+            </div>
+
+            <!-- Card render -->
+                <div id="cardsusers"></div>
+
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Dados do Novo Usuario:</h3>
+            <div id="createUser">
+                <label for="">Nome:</label>
+                <input type="text">
+                <label for="">Email:</label>
+                <input type="text">
+                <label for="">Nova Senha:</label>
+                <input type="text">
+                <label for="">Confirmar nova Senha:</label>
+                <input type="text">
+            </div>
+            <div id="btnUser">
+                <button>Cadastrar</button>
+            </div>
+        </div>
+    </div>
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <span class="close2">&times;</span>
+            <h3>Atualizar Dados do Usuario:</h3>
+            <div id="createUser">
+                <label for="">Nome:</label>
+                <input id="attUserNome" type="text">
+                <label for="">Sobrenome:</label>
+                <input id="attUserSobrenome" type="text">
+                <label for="">Email:</label>
+                <input id="attUserEmail" type="text">
+                <label for="">Nova Senha:</label>
+                <input id="attUserSenha" type="text">
+                <label for="">Confirmar nova Senha:</label>
+                <input id="attUserConfirmSenha"type="text">
+                <label for="">Usuário Ativo?</label>
+                <div>
+                    <input type="radio" id="attUserAtivo" class="selectIsUserActive" name="userAtivo" value=1/> Sim<br />
+                </div>
+                <div>
+                    <input type="radio" id="attUserInativo" class="selectIsUserActive" name="userAtivo" value=0/> Não<br />
+                </div>
+            </div>
+          
+            <div id="btnUser">
+                <button onclick="atualizarUser()">Atualizar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="telaDeDispositivos" style="display: none;">
+        <div id="containerDispositivo">
+            <div id="newDevice">
+                <h2>Dispositivos:</h2>
+                <button id="myBtnDevice">Novo Dispositivo</button>
+            </div>
+
+            <!-- Card render -->
+                <div id="cardsDevices"></div>
+        </div>
+    </div>
+    <div id="myModalDispositivo" class="modal">
+        <div class="modal-content">
+            <span class="closeModalDevice">&times;</span>
+            <h3>Novo Dispositivo:</h3>
+            <div id="createDevice">
+                <label for="">Selecione um colaborador</label>  <select id="selectUsers">
+                    <option value=""></option>
+              </select>
+              <label for="">Marca:</label>
+              <input id="addMarca" type="text">
+              <label for="">Modelo:</label>
+              <input id="addModelo" type="text">
+              <label for="">Host-Name:</label>
+              <input id="addHostName" type="text">
+            </div>
+            <div id="btnDevice">
+                <button onclick="cadastrar()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+    <div id="myModalDispositivo2" class="modal">
+        <div class="modal-content">
+            <span class="closeModalDevice2">&times;</span>
+            <h3>Atualizar colaborador do dispositivo</h3>
+            <div id="createUser">
+                <select id="selectUsers2">
+                    <option value=""></option>
+              </select>
+              <label for="">Id patrimonio:</label>
+              <input id="attId" type="text" readonly>
+              <label for="">Hostname:</label>
+              <input id="attHostname" type="text" readonly>
+            <div id="btnDevice2">
+                <button onclick="atualizarDispositivo()">Atualizar</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <a href="#body">
+        <img id="upArrow" src="../../src/assets/up-arrow.png" alt="" title="Voltar ao topo">
+    </a>
+
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../src/components/Footer/index.js"></script>
+<script src="./script.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

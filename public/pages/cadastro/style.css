@@ -1,0 +1,166 @@
+#container_register{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 200px;
+}
+
+#container_register img {
+  width: 500px;
+  margin: 100px;
+}
+
+#form_register{
+  padding-top: 200px;
+  display: flex;
+  flex-direction: column;
+  color: #b58fff;
+  align-items: center;
+  margin-bottom: 90px;
+}
+
+#form_box .form_box2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1faee;
+  border: 4px solid #b58fff;
+  border-radius: 40px;
+}
+
+#form_box .form_box2 p {
+  margin-top: 20px;
+}
+
+#form_box .form_box2 h2 {
+  margin: 20px;
+}
+
+#btn_voltar{
+  background-color: #6c757d !important;
+  transition: all 0.2s;
+}
+
+#btn_voltar:hover {
+  background-color: #495057 !important;
+}
+
+#form_box .form_box2 button {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  color: white;
+  background-color: #9c71f3;
+  font-size: 15px;
+  width: 180px;
+  height: 40px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+#form_box .form_box2 button:hover {
+  background-color: #9c71f3ba;
+}
+
+#form_box .form_box2 input {
+  border-color: #b58fff;
+  border: none;
+  border-bottom: 3px solid;
+  padding: 5px;
+  color: #b58fff;
+  font-size: 20px;
+  width: 200px;
+  height: 25px;
+  border-radius: 3px;
+  background-color: transparent;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#form_box .form_box2 input:focus {
+  outline: none;
+}
+
+#form_box a {
+  margin-bottom: 20px;
+  color: #b58fff;
+}
+
+#informacoes_empresa{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#informacoes_usuario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+#btn_cadastrar{
+  margin-left: 5px;
+}
+
+#FocusSenha{
+  position: absolute;
+  cursor: pointer;
+  margin-left: 190px;
+  color: #9c71f3;  
+}
+
+#FocusSenha1{
+  position: absolute;
+  margin-left: 190px;
+  cursor: pointer;
+  color: #9c71f3;  
+}
+
+
+.campos_center {
+  display: flex;
+  flex-direction: row;
+}
+
+.campos_center p {
+ text-align: center;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 800px){
+  #container_register{
+    padding-top: 0;
+    flex-direction: column-reverse;
+    overflow: clip;
+  }
+ 
+  .campos_center{
+    flex-direction: column;
+  }
+ 
+  #form_box .form_box2 button{
+    margin: 15px;
+  }
+  .btn_acoes{
+    display: flex;
+    flex-direction: column !important;
+  }
+
+  #container_register img {
+    width: 350px;
+  }
+  
+}
+@media only screen and (min-width: 801px) and (max-width: 1300px){
+  #container_register{
+    padding-top: 0;
+    flex-direction: column-reverse;
+    overflow: clip;
+  }
+  
+}
