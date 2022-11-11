@@ -10,6 +10,7 @@ var app = express();
 
 var indexRouter = require("./src-node/routes/index");
 var usuarioRouter = require("./src-node/routes/usuarios");
+var hardwareRouter = require("./src-node/routes/hardware");
 var dispositivoRouter = require("./src-node/routes/dispositivos");
 
 
@@ -22,6 +23,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/dispositivos", dispositivoRouter);
+app.use("/hardware", hardwareRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

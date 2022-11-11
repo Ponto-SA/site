@@ -109,7 +109,15 @@ body {
     background-color: #240046;
     border: solid 2px #b58fff;
     border-radius: 10px;
+}
 
+#chartBox2 #hist_chart #filter_button {
+    color: #b58fff;
+    background-color: #240046;
+    border: solid 2px #b58fff;
+    border-radius: 10px;
+    width: 90px;
+    cursor: pointer;
 }
 
 #chartBox2 #hist_chart .select_box {
