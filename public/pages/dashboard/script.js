@@ -304,9 +304,6 @@ function logout() {
   window.location = "../login/index.html";
 }
 /*TERMINO JAVA SCRIPT NAVBAR*/
-/*INICIO MODAL*/
-
-/*MODAL ACESSO*/
 var modal = document.getElementById("myModal");
 var modal2 = document.getElementById("myModal2");
 var btn = document.getElementById("myBtn");
