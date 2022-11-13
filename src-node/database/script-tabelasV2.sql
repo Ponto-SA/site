@@ -98,6 +98,7 @@ id int primary key auto_increment,
 fk_usuario int,
 fk_dispositivo int,
 data_hora datetime default current_timestamp,
+ativo int,
 foreign key (fk_dispositivo)
 references dispositivo(id),
 foreign key (fk_usuario)
@@ -149,3 +150,4 @@ INSERT INTO tipo_metrica VALUES (NULL, 'Processador', 'Uso', '%');
 INSERT INTO tipo_metrica VALUES (NULL, 'Memoria', 'Uso', '%');
 INSERT INTO tipo_metrica VALUES (NULL, 'Disco', 'Uso', '%');
 INSERT INTO tipo_metrica VALUES (NULL, 'Temperatura', 'Total', '%');
+INSERT INTO tipo_metrica VALUES (NULL, 'UsoMemoriaProcesso', '%');
