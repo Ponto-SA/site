@@ -180,30 +180,112 @@ function listarFuncionarios(req, res) {
   }
 }
 
-
-function atualizarFuncionario(req, res){
+function atualizarFuncionario(req, res) {
   const nivelAcesso = req.nivelAcesso;
   const idFuncionario = req.body.idFuncionario;
   const nome = req.body.nome;
+  const sobrenome = req.body.sobrenome;
   const email = req.body.email;
   const senha = req.body.senha;
   const status = req.body.status;
   const opcao = req.body.opcao;
 
-
-if(nivelAcesso === 2){
-  usuarioModel.atualizarFuncionario(idFuncionario, nome, email, senha, status, opcao).then((response) => {
-    res.status(200).json(response);
-  }).catch(err => {
-    res.json(500).json(err)
-  })
-}else {
-  res.json(401).json({mensagem: "Você não possuí acesso!"})
-
+  if (nivelAcesso === 2) {
+    usuarioModel
+      .atualizarFuncionario(
+        idFuncionario,
+        nome,
+        sobrenome,
+        email,
+        senha,
+        status,
+        opcao
+      )
+      .then(() => {
+        res.status(200).json({
+          mensagem: "Funcionário atualizado com sucesso",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(500).json(err);
+      });
+  } else {
+    res.json(401).json({ mensagem: "Você não possuí acesso!" });
+  }
 }
- 
 
+async function cadastrarFuncionario(req, res) {
+  const nivelAcesso = req.nivelAcesso;
+  const idGestor = req.userId;
+  const endereco = req.endereco;
+  const empresa = req.empresa;
 
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const email = req.body.email;
+  const senha = req.body.senha;
+
+  if (nivelAcesso === 2) {
+    const isUserExitent = await usuarioModel.validIsEmail(email);
+
+    if(isUserExitent.length > 0){
+      res.status(403).json({
+        mensagem: "Usuário já cadastrado!"
+      });
+    }else {
+      try {
+          await usuarioModel.cadastrarFuncionario(
+            idGestor,
+            firstname,
+            lastname,
+            email,
+            senha
+          );
+
+          const idUser = await usuarioModel.validIsEmail(email);
+          const id = idUser[0].id;
+          await empresaModel.relacionarDados(id, empresa, endereco);
+          await acessoModel.inserirAcesso(id, 1);
+
+          res.json({
+            mensagem: "Usuário cadastrado com sucesso!"
+          })
+        
+      } catch (err) {
+        console.log(err);
+        res.status(500).json({
+          err,
+        });
+      }
+  
+    }
+  }else {
+    res.status(401).json({
+      mensagem: "Não autorizado!",
+    });
+  }
+}
+async function delUser(req, res) {
+  const nivelAcesso = req.nivelAcesso;
+  const idFuncionario = req.body.idFuncionario;
+
+  if (nivelAcesso === 2) {
+    try {
+      await associativaModel.del_user_maquina(idFuncionario);
+      await associativaModel.del_empresa_user(idFuncionario);
+      await associativaModel.del_nivel_acesso(idFuncionario);
+      await usuarioModel.excluirUsuario(idFuncionario);
+
+      res.json({
+        mensagem: "Usuário deletado com sucesso!",
+      });
+    } catch (err) {
+      res.status(500).json({
+        err,
+      });
+    }
+  }
 }
 
 module.exports = {
@@ -212,5 +294,7 @@ module.exports = {
   listar,
   testar,
   listarFuncionarios,
-  atualizarFuncionario
+  atualizarFuncionario,
+  cadastrarFuncionario,
+  delUser,
 };
