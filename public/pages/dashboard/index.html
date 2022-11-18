@@ -100,7 +100,7 @@
             </div>
         </div>
         <div id="chartBox_line">
-            <div class="data_box">
+            <div class="data_box" id="cpuChartBox">
                 <div style="width: 200px">
                     <canvas id="cpuChart"></canvas>
                 </div>
@@ -109,7 +109,7 @@
                     <p id="cpuPercentageUsage">40%</p>
                 </div>
             </div>
-            <div class="data_box">
+            <div class="data_box" id="ramChartBox">
                 <div style="width: 200px">
                     <canvas id="ramChart"></canvas>
                 </div>
@@ -119,7 +119,7 @@
                     <b id="ramGb">8.0/16.0GB</b>
                 </div>
             </div>
-            <div class="data_box">
+            <div class="data_box" id="ramProcChartBox">
                 <div style="width: 200px">
                     <canvas id="ramProcChart"></canvas>
                 </div>
@@ -131,7 +131,7 @@
             </div>
         </div>
         <div id="chartBox_line2">
-            <div class="data_box">
+            <div class="data_box" id="cpuTempChartBox">
                 <div style="width: 200px">
                     <canvas id="cpuTempChart"></canvas>
                 </div>
@@ -140,22 +140,22 @@
                     <p id="cpuTempCelsius">43°C</p>
                 </div>
             </div>
-            <div class="data_box">
+            <div class="data_box" id="discChartBox">
                 <div style="width: 200px">
                     <canvas id="discChart"></canvas>
                 </div>
                 <div class="textData">
-                    <h3>DISCO (C:)</h3>
+                    <h3>DISCO 1</h3>
                     <p id="discPercentageUsage">25%</p>
                     <b id="discGb">60/240GB</b>
                 </div>
             </div>
-            <div class="data_box">
+            <div class="data_box" id="disc2ChartBox">
                 <div style="width: 200px">
                     <canvas id="disc2Chart"></canvas>
                 </div>
                 <div class="textData">
-                    <h3>DISCO (E:)</h3>
+                    <h3>DISCO 2</h3>
                     <p id="disc2PercentageUsage">50%</p>
                     <b id="disc2Gb">250/500GB</b>
                 </div>
@@ -228,8 +228,8 @@
                     <option value="quatroSemanas">4 semanas</option>
                 </select>
                 <select id="disc_select">
-                    <option value="disco1">Disco C</option>
-                    <option value="disco2">Disco E</option>
+                    <option value="disco1">Disco 1</option>
+                    <option value="disco2">Disco 2</option>
                 </select>
                 <button id="filter_button" onclick="discHistFilter()">
                     Filtrar
