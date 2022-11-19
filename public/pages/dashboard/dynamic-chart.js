@@ -358,6 +358,11 @@ function colorAlert(metric, alert, critic){
   }
 }
 
+function updatePorFunc() {
+  var idColaborador = selectUser.value;
+  alert(idColaborador);
+}
+
 getRamUsage();
 getCpuUsage();
 getRamProcUsage();
