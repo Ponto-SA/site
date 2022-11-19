@@ -15,7 +15,7 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <link rel="stylesheet" href="../../src/Global/preloader.css">
     <script src="../../src/Global/preloader.js"></script>
-
+    
     <title>SA Ponto</title>
 </head>
 
@@ -88,14 +88,9 @@
         <div id="title">
             <h2 id="toTheTop">Métricas de uso - Hardware</h2>
             <div id="filterUsers">
-                <label for="selectUser">Selecione o Colaborador</label>
-                <select id="selectUser" aria-placeholder="-- Selecione --">
-                    <option value="">Gabriel</option>
-                    <option value="">Yucatan</option>
-                    <option value="">Lukas</option>
-                    <option value="">Jeferson</option>
-                    <option value="">Matheus</option>
-                    <option value="">Yohan</option>
+                <label for="">Selecione o Colaborador</label>
+                <select id="selectUser" onclick="filterUser()" onchange="update()">
+                    <option value="" disabled selected hidden>- - Selecione - -</option>
                 </select>
             </div>
         </div>
@@ -437,3 +432,4 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script src="relatorioPonto.js"></script>
+<script src="filterUser.js"></script>

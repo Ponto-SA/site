@@ -497,6 +497,11 @@ function discHistFilter(){
   getHistoricoDisc(discHistFilterPeriod());
 }
 
+function updatePorFunc() {
+  var idColaborador = selectUser.value;
+  alert(idColaborador);
+}
+
 cpuHistFilter();
 ramHistFilter();
 ramProcHistFilter();
