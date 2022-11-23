@@ -35,7 +35,7 @@ id int primary key auto_increment,
 nome varchar(45) NOT NULL
 );
 
-INSERT INTO pontosa.nivel_acesso VALUES
+INSERT INTO nivel_acesso VALUES 
 (NULL, 'Colaborador'),
 (NULL, 'Gestor'),
 (NULL, 'Admin');

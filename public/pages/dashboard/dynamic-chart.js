@@ -21,6 +21,8 @@ function cpuGraphPlot(resposta) {
     Chart.getChart("cpuChart").destroy();
   }
 
+  document.getElementById("cpuChartBox").style.boxShadow = "5px 5px 5px 1px " + colorAlert(cpuUsage, 65, 80);
+  
   let cpuChart = new Chart(CHART, {
     type: "doughnut",
     data: {
@@ -28,7 +30,7 @@ function cpuGraphPlot(resposta) {
       datasets: [
         {
           label: "Porcentagem uso",
-          backgroundColor: ["#240046", "#9370DB"],
+          backgroundColor: ["#240046", colorAlert(cpuUsage, 65, 80)],
           data: [(100 - cpuUsage), cpuUsage],
         },
       ],
@@ -56,6 +58,8 @@ function ramGraphPlot(resposta) {
     Chart.getChart("ramChart").destroy();
   }
 
+  document.getElementById("ramChartBox").style.boxShadow = "5px 5px 5px 1px " + colorAlert(ramUsage, 70, 85);
+
   let ramChart = new Chart(CHART2, {
     type: "doughnut",
     data: {
@@ -63,7 +67,7 @@ function ramGraphPlot(resposta) {
       datasets: [
         {
           label: "Porcentagem uso",
-          backgroundColor: ["#240046", "#9370DB"],
+          backgroundColor: ["#240046", colorAlert(ramUsage, 70, 85)],
           data: [(100 - ramUsage), ramUsage],
         },
       ],
@@ -85,6 +89,8 @@ function ramProcGraphPlot(resposta) {
     Chart.getChart("ramProcChart").destroy();
   }
 
+  document.getElementById("ramProcChartBox").style.boxShadow = "5px 5px 5px 1px " + colorAlert(ramProcUsage, 30, 45);
+
   let ramProcChart = new Chart(CHART3, {
     type: "doughnut",
     data: {
@@ -92,8 +98,8 @@ function ramProcGraphPlot(resposta) {
       datasets: [
         {
           label: "Porcentagem uso",
-          backgroundColor: ["#240046", "#9370DB"],
-          data: [80, 20],
+          backgroundColor: ["#240046", colorAlert(ramProcUsage, 30, 45)],
+          data: [(ramProcUsage - 100), ramProcUsage],
         },
       ],
     },
@@ -111,6 +117,8 @@ function cpuTempGraphPlot(resposta) {
     Chart.getChart("cpuTempChart").destroy();
   }
 
+  document.getElementById("cpuTempChartBox").style.boxShadow = "5px 5px 5px 1px " + colorAlert(resposta[0].registro, 60, 75);
+
   let cpuTempChart = new Chart(CHART4, {
     type: "doughnut",
     data: {
@@ -118,7 +126,7 @@ function cpuTempGraphPlot(resposta) {
       datasets: [
         {
           label: "Temperatura em °C",
-          backgroundColor: ["#240046", "#9370DB"],
+          backgroundColor: ["#240046", colorAlert(resposta[0].registro, 60, 75)],
           data: [(100 - Number(resposta[0].registro)), resposta[0].registro],
         },
       ],
@@ -141,6 +149,8 @@ function discUsageGraphPlot(resposta){
     Chart.getChart("discChart").destroy();
   }
 
+  document.getElementById("discChartBox").style.boxShadow = "5px 5px 5px 1px " + colorAlert(resposta[0].registro, 80, 90);
+
   let discChart = new Chart(CHART5, {
     type: "pie",
     data: {
@@ -148,7 +158,7 @@ function discUsageGraphPlot(resposta){
       datasets: [
         {
           label: "Porcentagem uso",
-          backgroundColor: ["#240046", "#9370DB"],
+          backgroundColor: ["#240046", colorAlert(resposta[0].registro, 80, 90)],
           data: [(discTotal - percentageToGbUsage), percentageToGbUsage],
         },
       ],
@@ -172,6 +182,8 @@ function disc2UsageGraphPlot(resposta){
     Chart.getChart("disc2Chart").destroy();
   }
 
+  document.getElementById("disc2ChartBox").style.boxShadow = "5px 5px 5px 1px " + colorAlert(resposta[0].registro, 80, 90);
+
   let disc2Chart = new Chart(CHART6, {
     type: "pie",
     data: {
@@ -179,8 +191,8 @@ function disc2UsageGraphPlot(resposta){
       datasets: [
         {
           label: "Porcentagem uso",
-          backgroundColor: ["#240046", "#9370DB"],
-          data: [(discTotal - (Number(resposta[0].registro))), (Number(resposta[0].registro))],
+          backgroundColor: ["#240046", colorAlert(resposta[0].registro, 80, 90)],
+          data: [(discTotal - percentageToGbUsage), percentageToGbUsage],
         },
       ],
     },
@@ -334,6 +346,21 @@ function getDisc2Usage() {
     .catch(function (error) {
       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
+}
+
+function colorAlert(metric, alert, critic){
+  if(metric >= critic){
+    return "red";
+  } else if(metric >= alert){
+    return "orange";
+  } else {
+    return "#9370DB";
+  }
+}
+
+function updatePorFunc() {
+  var idColaborador = selectUser.value;
+  alert(idColaborador);
 }
 
 getRamUsage();
