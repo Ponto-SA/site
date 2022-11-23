@@ -184,9 +184,7 @@ function deletarUser(id, email) {
       }).then(() => {
         Swal.fire("Deletado!", "Usuário deletado com sucesso.", "success");
         listarFuncionarios();
-
       });
-
     } else if (result.dismiss == "cancel") {
       Swal.fire("Ação cancelada!", "", "error");
     } else {
@@ -200,6 +198,43 @@ function modalAtualizarDispositivo(hostname, id) {
   console.log(hostname);
   attHostname.value = hostname;
   attId.value = id;
+}
+
+function cadastrarUser() {
+  const nome = newNome.value;
+  const sobrenome = newSobrenome.value;
+  const email = newEmail.value;
+  const senha = newSenha.value;
+  const confirmSenha = newConfirmSenha.value;
+
+  const senhaCorret = senha === confirmSenha ? true : false;
+
+  if (senhaCorret) {
+    fetch("/usuarios/cadastrarFuncionario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token,
+        firstname: nome,
+        lastname: sobrenome,
+        email,
+        senha,
+      }),
+    })
+      .then((res) => {
+        res.json().then((dados) => {
+          Swal.fire(`${dados.mensagem}`, "", "success");
+        });
+      })
+      .catch((err) => {
+        Swal.fire(`${err}`, "", "error");
+        console.log(err);
+      });
+  } else {
+    Swal.fire('Senhas divergentes!', "", "error");
+  }
 }
 
 function atualizarDispositivo() {
@@ -221,7 +256,7 @@ function atualizarDispositivo() {
   })
     .then((response) => {
       if (response.ok) {
-        Swal.fire("Dispositivo cadastrado com sucesso!");
+        Swal.fire("Dispositivo cadastrado com sucesso!", "", "success");
       } else {
         response.json().then((dados) => {
           Swal.fire(`${dados.mensagem}`, "", "error");
