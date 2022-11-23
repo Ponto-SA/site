@@ -23,26 +23,34 @@ function listarFuncionarios(idGestor) {
   return database.executar(query);
 }
 
-function atualizarFuncionario(idFuncionario, nome, email, senha, status, opcao){
+function atualizarFuncionario(idFuncionario, nome, sobrenome, email, senha, status, opcao){
   switch(opcao){
     case 1: {
-      const query = `UPDATE usuario SET nome = '${nome}', email = '${email}', status = ${status} WHERE id = ${idFuncionario}`;
+      const query = `UPDATE usuario SET nome = '${nome}', sobrenome = '${sobrenome}', email = '${email}', status = ${status} WHERE id = ${idFuncionario}`;
       return database.executar(query);
     }case 2: {
-      const query = `UPDATE usuario SET nome = '${nome}', email = '${email}', senha = '${senha}', status = ${status} WHERE id = ${idFuncionario}`;
+      const query = `UPDATE usuario SET nome = '${nome}', sobrenome = '${sobrenome}', email = '${email}', senha = '${senha}', status = ${status} WHERE id = ${idFuncionario}`;
       return database.executar(query);
     }
-      
   }
-
 }
 
+function cadastrarFuncionario(idGestor, firstname, lastname, email, senha){
+  const query = `INSERT INTO usuario(nome, sobrenome, email, senha, status, fk_chefe) VALUES ('${firstname}', '${lastname}', '${email}', '${senha}', 1, ${idGestor})`;
+  return database.executar(query);
+}
 
+function excluirUsuario(idUser){
+  const query = `DELETE FROM usuario WHERE id = ${idUser}`;
+  return database.executar(query);
+}
 
 module.exports = {
   entrar,
   cadastrar,
   validIsEmail,
   listarFuncionarios,
-  atualizarFuncionario
+  atualizarFuncionario,
+  cadastrarFuncionario,
+  excluirUsuario
 };

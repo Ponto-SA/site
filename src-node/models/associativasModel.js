@@ -13,4 +13,22 @@ function idsRelacionado(idUser) {
   return database.executar(query);
 }
 
-module.exports = { idsRelacionado };
+function del_user_maquina(idUser) {
+  const query = `DELETE FROM usuario_maquina WHERE fk_usuario = ${idUser}`;
+  return database.executar(query);
+}
+function del_empresa_user(idUser) {
+  const query = `DELETE FROM empresa_usuario WHERE fk_usuario = ${idUser}`;
+  return database.executar(query);
+}
+function del_nivel_acesso(idUser) {
+  const query = `DELETE FROM usuario_nivel_acesso WHERE fk_usuario = ${idUser}`;
+  return database.executar(query);
+}
+
+module.exports = {
+  idsRelacionado,
+  del_user_maquina,
+  del_empresa_user,
+  del_nivel_acesso,
+};
