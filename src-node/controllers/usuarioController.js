@@ -180,7 +180,7 @@ function listarFuncionarios(req, res) {
   }
 }
 
-function atualizarFuncionario(req, res) {
+async function atualizarFuncionario(req, res) {
   const nivelAcesso = req.nivelAcesso;
   const idFuncionario = req.body.idFuncionario;
   const nome = req.body.nome;
@@ -191,25 +191,20 @@ function atualizarFuncionario(req, res) {
   const opcao = req.body.opcao;
 
   if (nivelAcesso === 2) {
-    usuarioModel
-      .atualizarFuncionario(
-        idFuncionario,
-        nome,
-        sobrenome,
-        email,
-        senha,
-        status,
-        opcao
-      )
-      .then(() => {
-        res.status(200).json({
-          mensagem: "Funcionário atualizado com sucesso",
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.json(500).json(err);
-      });
+
+    const isUserExitent = await usuarioModel.validIsEmail(email);
+
+    isUserExitent.length > 0 ? res.status(401).send({mensagem: "E-mail já existente"}) : true;
+
+    await usuarioModel.atualizarFuncionario(
+      idFuncionario,
+      nome,
+      sobrenome,
+      email,
+      senha,
+      status,
+      opcao
+    );
   } else {
     res.json(401).json({ mensagem: "Você não possuí acesso!" });
   }
@@ -229,38 +224,36 @@ async function cadastrarFuncionario(req, res) {
   if (nivelAcesso === 2) {
     const isUserExitent = await usuarioModel.validIsEmail(email);
 
-    if(isUserExitent.length > 0){
+    if (isUserExitent.length > 0) {
       res.status(403).json({
-        mensagem: "Usuário já cadastrado!"
+        mensagem: "Usuário já cadastrado!",
       });
-    }else {
+    } else {
       try {
-          await usuarioModel.cadastrarFuncionario(
-            idGestor,
-            firstname,
-            lastname,
-            email,
-            senha
-          );
+        await usuarioModel.cadastrarFuncionario(
+          idGestor,
+          firstname,
+          lastname,
+          email,
+          senha
+        );
 
-          const idUser = await usuarioModel.validIsEmail(email);
-          const id = idUser[0].id;
-          await empresaModel.relacionarDados(id, empresa, endereco);
-          await acessoModel.inserirAcesso(id, 1);
+        const idUser = await usuarioModel.validIsEmail(email);
+        const id = idUser[0].id;
+        await empresaModel.relacionarDados(id, empresa, endereco);
+        await acessoModel.inserirAcesso(id, 1);
 
-          res.json({
-            mensagem: "Usuário cadastrado com sucesso!"
-          })
-        
+        res.json({
+          mensagem: "Usuário cadastrado com sucesso!",
+        });
       } catch (err) {
         console.log(err);
         res.status(500).json({
           err,
         });
       }
-  
     }
-  }else {
+  } else {
     res.status(401).json({
       mensagem: "Não autorizado!",
     });
