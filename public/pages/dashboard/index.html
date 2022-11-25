@@ -68,7 +68,7 @@
                     <span class="icon">
                         <ion-icon name="tv" onclick="iconeDevice()"></ion-icon>
                     </span>
-                    <span class="text"  onclick="iconeUser()">Usuarios</span>
+                    <span class="text"  onclick="iconeUser()">Maquinas</span>
                 </a>
             </li>
         </ul>
@@ -114,6 +114,8 @@
                     <b id="ramGb">8.0/16.0GB</b>
                 </div>
             </div>
+        </div>
+        <div id="chartBox_line2">
             <div class="data_box" id="ramProcChartBox">
                 <div style="width: 200px">
                     <canvas id="ramProcChart"></canvas>
@@ -124,9 +126,7 @@
                     <b id="ramProcGb">2.5/16.0GB</b>
                 </div>
             </div>
-        </div>
-        <div id="chartBox_line2">
-            <div class="data_box" id="cpuTempChartBox">
+            <div class="data_box" id="cpuTempChartBox" style="display: none;">
                 <div style="width: 200px">
                     <canvas id="cpuTempChart"></canvas>
                 </div>
@@ -145,7 +145,7 @@
                     <b id="discGb">60/240GB</b>
                 </div>
             </div>
-            <div class="data_box" id="disc2ChartBox">
+            <div class="data_box" id="disc2ChartBox" style="display: none;">
                 <div style="width: 200px">
                     <canvas id="disc2Chart"></canvas>
                 </div>
