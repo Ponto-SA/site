@@ -13,8 +13,8 @@ function idsRelacionado(idUser) {
   return database.executar(query);
 }
 
-function del_user_maquina(idUser) {
-  const query = `DELETE FROM usuario_maquina WHERE fk_usuario = ${idUser}`;
+function del_user_maquina(idDispositivo) {
+  const query = `DELETE FROM usuario_maquina WHERE fk_dispositivo = ${idDispositivo}`;
   return database.executar(query);
 }
 function del_empresa_user(idUser) {

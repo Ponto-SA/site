@@ -12,6 +12,7 @@ router.post("/listar",jwtAuth, dispositivoController.listar);
 router.post("/atualizarDispositivo", jwtAuth, dispositivoController.atualizarDispositivo);
 router.post("/atualizarUpdate", jwtAuth, dispositivoController.atualizarUpdate);
 router.post("/atualizarUpdate2", jwtAuth, dispositivoController.atualizarUpdate2);
+router.post("/deletar", jwtAuth, dispositivoController.deletarDipositivo);
 
 
 module.exports = router;
