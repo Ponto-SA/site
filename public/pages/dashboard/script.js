@@ -156,8 +156,6 @@ function atualizarUser() {
 }
 
 function deletarUser(id, email) {
-  console.log(id);
-
   Swal.fire({
     title: "Deletar este usuario ?",
     text: "Digite o e-mail para deletar !",
@@ -233,7 +231,7 @@ function cadastrarUser() {
         console.log(err);
       });
   } else {
-    Swal.fire('Senhas divergentes!', "", "error");
+    Swal.fire("Senhas divergentes!", "", "error");
   }
 }
 
@@ -257,6 +255,8 @@ function atualizarDispositivo() {
     .then((response) => {
       if (response.ok) {
         Swal.fire("Dispositivo cadastrado com sucesso!", "", "success");
+        modalDispositivo2.style.display = "none";
+        listarDispositivos();
       } else {
         response.json().then((dados) => {
           Swal.fire(`${dados.mensagem}`, "", "error");
@@ -268,6 +268,46 @@ function atualizarDispositivo() {
     });
 
   return false;
+}
+
+function deletarMaquina(hostname) {
+  Swal.fire({
+    title: "Deletar esta máquina ?",
+    text: "Digite o hostname para deletar !",
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "Ops, Cancelar!",
+    confirmButtonText: "Ok, Pode Deletar!",
+  }).then((result) => {
+    if (result.value === hostname) {
+      fetch("/dispositivos/deletar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+          hostname,
+        }),
+      }).then((response) => {
+        response.json().then((dados) => {
+          if (response.ok) {
+            Swal.fire(`${dados.mensagem}`, "", "success");
+            listarDispositivos();
+          } else {
+            Swal.fire(`${dados.mensagem}`, "", "error");
+          }
+        });
+      });
+    } else {
+      Swal.fire(`Hostname incorreto!`, "", "error");
+    }
+  });
 }
 
 function listarFuncionarios() {
@@ -316,12 +356,11 @@ function listarFuncionarios() {
   });
 }
 
-function cadastrar() {
+function cadastrarDipositivo() {
   let marca = String(addMarca.value.trim());
   let modelo = String(addModelo.value.trim());
   let hostName = String(addHostName.value.trim());
   let idUsuario = Number(selectUsers.value);
-  console.log(idUsuario);
 
   fetch("/dispositivos/cadastrar", {
     method: "POST",
@@ -342,6 +381,8 @@ function cadastrar() {
 
       if (response.ok) {
         Swal.fire("Dispositivo cadastrado com sucesso!");
+        listarDispositivos();
+        myModalDispositivo.style.display = "none";
       } else {
         response.json().then((dados) => {
           Swal.fire(`${dados.mensagem}`, "", "error");
@@ -371,8 +412,8 @@ function listarDispositivos() {
     }),
   }).then((response) => {
     response.json().then((dados) => {
+      cardsDevices.innerHTML = "";
       dados.forEach((dados) => {
-        console.log(dados);
         cardsDevices.innerHTML += `
                 <div id="cardAcesso">
                     <div id="infoUser">
@@ -387,7 +428,7 @@ function listarDispositivos() {
                             )"></ion-icon>
                         </div>
                         <div id="editUser">
-                            <ion-icon name="trash" onclick="deletarDispositivo()"></ion-icon>
+                            <ion-icon name="trash" onclick="deletarMaquina('${dados.host_name}')"></ion-icon>
                         </div>
                 </div>
                 `;
