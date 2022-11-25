@@ -501,7 +501,10 @@ function discHistFilter() {
   getHistoricoDisc(discHistFilterPeriod(), sessionStorage.UserDash);
 }
 
-cpuHistFilter();
-ramHistFilter();
-ramProcHistFilter();
-discHistFilter();
+
+setTimeout(() => {
+  cpuHistFilter();
+  ramHistFilter();
+  ramProcHistFilter();
+  discHistFilter();
+}, 1000)
