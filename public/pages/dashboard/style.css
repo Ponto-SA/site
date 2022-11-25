@@ -27,6 +27,14 @@ body {
     outline: none;
 }
 
+#selectColaborator {
+    padding: 5px;
+    color: #fff;
+    background-color: #B58FFF;
+    border-radius: 5px;
+    outline: none;
+}
+
 #chartBox #chartBox_line {
     margin-top: 1%;
     display: flex;

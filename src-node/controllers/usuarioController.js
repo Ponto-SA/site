@@ -190,7 +190,7 @@ async function atualizarFuncionario(req, res) {
   const status = req.body.status;
   const opcao = req.body.opcao;
 
-  if (nivelAcesso === 2 || nivelAcesso === 1) {
+  if (nivelAcesso === 2) {
 
     const isUserExitent = await usuarioModel.validIsEmail(email);
 

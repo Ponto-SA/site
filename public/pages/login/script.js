@@ -23,7 +23,6 @@ function logar() {
       .then((resposta) => {
         resposta.json().then((json) => {
           if (resposta.ok) {
-            sessionStorage.userIdAtual = json.idUserAtual;
             if(json.auth){
                 localStorage.setItem('token', json.token);
                 Swal.fire(

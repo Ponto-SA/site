@@ -227,7 +227,7 @@ function getHistoric(req, res) {
     const today = req.body.historicParams[0].today;
     const gap = req.body.historicParams[0].gap;
     const metric = req.body.historicParams[0].tipo_metrica;
-    const id = req.userId;
+    const id = req.body.idDispositivo;
 
     usuarioModel.getHistoricWithGap(id, today, gap, metric)
       .then(function (resultado) {
@@ -245,7 +245,7 @@ function getHistoric(req, res) {
       );
   } else {
     const today = req.body.historicParams[0].today;
-    const id = req.userId;
+    const id = req.body.idDispositivo;
     const metric = req.body.historicParams[0].tipo_metrica;
 
     usuarioModel.getHistoricToday(id, today, metric)

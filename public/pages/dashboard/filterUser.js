@@ -12,7 +12,7 @@ function filterUser() {
         }).then((response) => {
             response.json().then((dados) => {
                 for (let i = 0; i < dados.length; i++) {
-                    selectUser.innerHTML += `
+                    selectColaborator.innerHTML += `
                     <option value='${dados[i].nome}'>${dados[i].nome}</option>
                     `
                 }
@@ -24,7 +24,7 @@ function filterUser() {
 }
 
 function filterUserDash() {
-    let nome = selectUser.value;
+    let nome = selectColaborator.value;
     fetch("/usuarios/dadosDispositivoFuncionario", {
         method: "POST",
         headers: {
@@ -36,14 +36,8 @@ function filterUserDash() {
         }),
     }).then((response) => {
         response.json().then((dados) => {
-            console.log(dados)
-            if(nome == 'myUser'){
-                sessionStorage.UserDash = dados[0].id;
-            }else{
-                sessionStorage.UserDash = dados[0].id;
-            }
+        sessionStorage.UserDash = dados[0].id;
         });
-
     })
 }
 window.onload = setTimeout(() => {

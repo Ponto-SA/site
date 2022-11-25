@@ -30,7 +30,7 @@ function listarUsuarios(idfunc) {
 }
 
 function listarDadosDispositivoFuncionario(idGestor, nomeColaborador) {
-  const query = `SELECT dispositivo.id, N.fk_chefe FROM usuario AS G 
+  const query = `SELECT dispositivo.id FROM usuario AS G 
   JOIN usuario AS N ON N.fk_chefe = G.id
   JOIN usuario_maquina ON N.id = usuario_maquina.fk_usuario
   JOIN dispositivo ON usuario_maquina.fk_dispositivo = dispositivo.id
