@@ -19,6 +19,10 @@ function listar(idUser) {
    return database.executar(query);
 }
 
+function listarDispositivo(hostname){
+  const query = `SELECT id FROM dispositivo WHERE host_name= '${hostname}'`;
+  return database.executar(query);
+}
 
 function atualizarUpdate(idFuncionario){
   const query = `update usuario_maquina set ativo = 0 where fk_usuario = ${idFuncionario} and data_hora <= now();`;
@@ -35,11 +39,18 @@ function atualizarDispositivo(idFuncionario, hostName){
    return database.executar(query);
 }
 
+function deletarDispositivo(id){
+  const query = `DELETE FROM dispositivo WHERE id = ${id}`;
+  return database.executar(query);
+}
+
 module.exports = {
   cadastrar,
   vincularUsuario,
   listar,
   atualizarDispositivo,
   atualizarUpdate,
-  atualizarUpdate2
+  atualizarUpdate2,
+  listarDispositivo,
+  deletarDispositivo
 };
