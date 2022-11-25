@@ -23,6 +23,29 @@ function listarFuncionarios(idGestor) {
   return database.executar(query);
 }
 
+function listarUsuarios(idfunc) {
+  const query = ` SELECT N.id, N.nome, N.sobrenome, N.email, N.status FROM usuario AS n
+  WHERE N.id = ${idfunc};`;
+  return database.executar(query);
+}
+
+function listarDadosDispositivoFuncionario(idGestor, nomeColaborador) {
+  const query = `SELECT dispositivo.id, N.fk_chefe FROM usuario AS G 
+  JOIN usuario AS N ON N.fk_chefe = G.id
+  JOIN usuario_maquina ON N.id = usuario_maquina.fk_usuario
+  JOIN dispositivo ON usuario_maquina.fk_dispositivo = dispositivo.id
+  WHERE G.id = ${idGestor} and N.nome = '${nomeColaborador}';`;
+  return database.executar(query);
+}
+
+function listarDadosDispositivoGestor(idGestor) {
+  const query = `SELECT dispositivo.id FROM usuario 
+  JOIN usuario_maquina ON usuario.id = usuario_maquina.fk_usuario
+  JOIN dispositivo ON usuario_maquina.fk_dispositivo = dispositivo.id
+  WHERE usuario.id = ${idGestor};`;
+  return database.executar(query);
+}
+
 function atualizarFuncionario(idFuncionario, nome, sobrenome, email, senha, status, opcao){
   switch(opcao){
     case 1: {
@@ -52,5 +75,8 @@ module.exports = {
   listarFuncionarios,
   atualizarFuncionario,
   cadastrarFuncionario,
-  excluirUsuario
+  excluirUsuario,
+  listarDadosDispositivoFuncionario,
+  listarDadosDispositivoGestor,
+  listarUsuarios
 };

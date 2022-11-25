@@ -21,7 +21,7 @@ function getCpuUsage(id) {
     FROM dispositivo AS disp
     JOIN disco ON disp.id = disco.fk_dispositivo 
     JOIN historico ON disp.id = historico.fk_dispositivo
-    WHERE historico.fk_dispositivo = ${id} AND fk_tipo_metrica = 6
+    WHERE historico.fk_dispositivo = ${id} AND fk_tipo_metrica = 5
     ORDER BY historico.id DESC LIMIT 1;`;
     return database.executar(query);
   }
@@ -47,7 +47,7 @@ function getCpuUsage(id) {
     FROM dispositivo AS disp
     JOIN disco ON disp.id = disco.fk_dispositivo 
     JOIN historico ON disp.id = historico.fk_dispositivo
-    WHERE historico.fk_dispositivo = ${id} AND historico.fk_tipo_metrica = 5
+    WHERE historico.fk_dispositivo = ${id} AND historico.fk_tipo_metrica = 6
     ORDER BY historico.id DESC LIMIT 1;`;
     return database.executar(query);
   }

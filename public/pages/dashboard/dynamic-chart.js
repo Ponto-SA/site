@@ -9,7 +9,6 @@ Chart.defaults.color = "white";
 
 var tamanhoDisco = 0;
 
-
 token == null ? (window.location.href = "../login/index.html") : "";
 
 function cpuGraphPlot(resposta) {
@@ -202,7 +201,7 @@ function disc2UsageGraphPlot(resposta){
   });
 }
 
-function getCpuUsage() {
+function getCpuUsage(idDispositivo) {
   fetch(`/hardware/getCpuUsage`, { 
   method: "POST",
   headers: {
@@ -210,9 +209,9 @@ function getCpuUsage() {
   },
   body: JSON.stringify({
     token,
+    idDispositivo
   }),
 }).then(function (response) {
-    console.log(response)
     if (response.ok) {
       response.json().then(function (resposta) {
         cpuGraphPlot(resposta);
@@ -226,7 +225,7 @@ function getCpuUsage() {
     });
 }
 
-function getRamUsage() {
+function getRamUsage(idDispositivo) {
   fetch(`/hardware/getRamUsage`, { 
   method: "POST",
   headers: {
@@ -234,9 +233,9 @@ function getRamUsage() {
   },
   body: JSON.stringify({
     token,
+    idDispositivo
   }),
 }).then(function (response) {
-    console.log(response)
     if (response.ok) {
       response.json().then(function (resposta) {
         ramGraphPlot(resposta);
@@ -250,7 +249,7 @@ function getRamUsage() {
     });
 }
 
-function getRamProcUsage() {
+function getRamProcUsage(idDispositivo) {
   fetch(`/hardware/getRamProcUsage`, { 
   method: "POST",
   headers: {
@@ -258,9 +257,9 @@ function getRamProcUsage() {
   },
   body: JSON.stringify({
     token,
+    idDispositivo
   }),
 }).then(function (response) {
-    console.log(response)
     if (response.ok) {
       response.json().then(function (resposta) {
         ramProcGraphPlot(resposta);
@@ -274,7 +273,7 @@ function getRamProcUsage() {
     });
 }
 
-function getCpuTemp() {
+function getCpuTemp(idDispositivo) {
   fetch(`/hardware/getCpuTemp`, { 
   method: "POST",
   headers: {
@@ -282,9 +281,9 @@ function getCpuTemp() {
   },
   body: JSON.stringify({
     token,
+    idDispositivo
   }),
 }).then(function (response) {
-    console.log(response)
     if (response.ok) {
       response.json().then(function (resposta) {
         cpuTempGraphPlot(resposta);
@@ -298,7 +297,7 @@ function getCpuTemp() {
     });
 }
 
-function getDiscUsage() {
+function getDiscUsage(idDispositivo) {
   fetch(`/hardware/getDiscUsage`, { 
   method: "POST",
   headers: {
@@ -306,12 +305,11 @@ function getDiscUsage() {
   },
   body: JSON.stringify({
     token,
+    idDispositivo
   }),
 }).then(function (response) {
-    console.log(response)
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log(resposta)
         discUsageGraphPlot(resposta);
       });
     } else {
@@ -323,7 +321,7 @@ function getDiscUsage() {
     });
 }
 
-function getDisc2Usage() {
+function getDisc2Usage(idDispositivo) {
   fetch(`/hardware/getDisc2Usage`, { 
   method: "POST",
   headers: {
@@ -331,12 +329,11 @@ function getDisc2Usage() {
   },
   body: JSON.stringify({
     token,
+    idDispositivo
   }),
 }).then(function (response) {
-    console.log(response)
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log(resposta)
         disc2UsageGraphPlot(resposta);
       });
     } else {
@@ -358,23 +355,19 @@ function colorAlert(metric, alert, critic){
   }
 }
 
-function updatePorFunc() {
-  var idColaborador = selectUser.value;
-  alert(idColaborador);
-}
 
-getRamUsage();
-getCpuUsage();
-getRamProcUsage();
-getCpuTemp();
-getDiscUsage();
-getDisc2Usage();
+getCpuUsage(Number(sessionStorage.UserDash));
+getRamUsage(Number(sessionStorage.UserDash));
+getRamProcUsage(Number(sessionStorage.UserDash));
+getCpuTemp(Number(sessionStorage.UserDash));
+getDiscUsage(Number(sessionStorage.UserDash));
+getDisc2Usage(Number(sessionStorage.UserDash));
 
 window.onload = setInterval(() => {
-  getCpuUsage();
-  getRamUsage();
-  getRamProcUsage();
-  getCpuTemp();
-  getDiscUsage();
-  getDisc2Usage();
-}, 5000)
+  getCpuUsage(Number(sessionStorage.UserDash));
+  getRamUsage(Number(sessionStorage.UserDash));
+  getRamProcUsage(Number(sessionStorage.UserDash));
+  getCpuTemp(Number(sessionStorage.UserDash));
+  getDiscUsage(Number(sessionStorage.UserDash));
+  getDisc2Usage(Number(sessionStorage.UserDash));
+}, 1000)

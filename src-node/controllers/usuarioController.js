@@ -43,9 +43,9 @@ async function entrar(req, res) {
   const isUser = user.length == 0 ? false : true;
   if (isUser) {
     const idUser = user[0].id;
+    const nomeUser = user[0].nome;
     const idsRelacionados = await associativaModel.idsRelacionado(idUser);
-
-    const token = jwt.sign({ idUser, idsRelacionados }, assinature, {
+    const token = jwt.sign({ idUser, idsRelacionados, nomeUser}, assinature, {
       expiresIn: "1d",
     });
     res.status(200).json({
@@ -169,11 +169,11 @@ function listarFuncionarios(req, res) {
   const iduser = req.userId;
   const nivelAcesso = req.nivelAcesso;
 
-  if (nivelAcesso === 2) {
+  if (nivelAcesso === 2 || nivelAcesso === 1) {
     usuarioModel.listarFuncionarios(iduser).then((response) => {
       res.status(200).json(response);
     });
-  } else {
+  }else{
     res.status(401).json({
       message: "Você não possuí acesso!",
     });
@@ -190,7 +190,7 @@ async function atualizarFuncionario(req, res) {
   const status = req.body.status;
   const opcao = req.body.opcao;
 
-  if (nivelAcesso === 2) {
+  if (nivelAcesso === 2 || nivelAcesso === 1) {
 
     const isUserExitent = await usuarioModel.validIsEmail(email);
 
@@ -207,6 +207,26 @@ async function atualizarFuncionario(req, res) {
     );
   } else {
     res.json(401).json({ mensagem: "Você não possuí acesso!" });
+  }
+}
+
+function listarDadosDispositivoFuncionario(req, res) {
+  const iduser = req.userId;
+  const nomeColaborador = req.body.nome;
+
+  console.log(nomeColaborador)
+  if (nomeColaborador != "myUser" && iduser != null) {
+    usuarioModel.listarDadosDispositivoFuncionario(iduser, nomeColaborador).then((response) => {
+      res.status(200).json(response);
+    });
+  } else if(nomeColaborador == "myUser" && iduser != null){
+    usuarioModel.listarDadosDispositivoGestor(iduser).then((response) => {
+      res.status(200).json(response);
+    });
+  }else {
+    res.status(401).json({
+      message: "Você não possuí acesso!  ok",
+    });
   }
 }
 
@@ -290,4 +310,5 @@ module.exports = {
   atualizarFuncionario,
   cadastrarFuncionario,
   delUser,
+  listarDadosDispositivoFuncionario
 };
