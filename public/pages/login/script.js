@@ -23,8 +23,6 @@ function logar() {
       .then((resposta) => {
         resposta.json().then((json) => {
           if (resposta.ok) {
-            console.log(json);
-
             if(json.auth){
                 localStorage.setItem('token', json.token);
                 Swal.fire(
