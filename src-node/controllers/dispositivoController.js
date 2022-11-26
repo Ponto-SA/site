@@ -1,11 +1,6 @@
-const usuarioModel = require("../models/usuarioModel");
-const empresaModel = require("../models/empresaModel");
-const acessoModel = require("../models/acessoModel");
 const associativaModel = require("../models/associativasModel");
 const dispositivoModel = require("../models/dispositivoModel");
-const jwt = require("jsonwebtoken");
-const { response } = require("express");
-const assinature = "pontosa.com";
+
 
 function testar(req, res) {
   console.log("ENTRAMOS NA usuarioController");
@@ -125,9 +120,6 @@ async function deletarDipositivo(req, res){
       mensagem: "Você não tem autorização."
     })
   }
-
-
-
 }
 
 module.exports = {

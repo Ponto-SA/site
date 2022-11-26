@@ -1,8 +1,8 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const jwtAuth = require("../controllers/JwtAuth");
 
-var dispositivoController = require("../controllers/dispositivoController");
+const dispositivoController = require("../controllers/dispositivoController");
 
 router.get("/", dispositivoController.testar);
 

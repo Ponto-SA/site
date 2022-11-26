@@ -1,8 +1,8 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const jwtAuth = require("../controllers/JwtAuth");
 
-var hardwareController = require("../controllers/hardwareController");
+const hardwareController = require("../controllers/hardwareController");
 
 router.post("/getCpuUsage", jwtAuth, hardwareController.getCpuUsage);
 

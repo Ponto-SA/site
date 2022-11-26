@@ -35,7 +35,7 @@ function atualizarUpdate2(id){
 }
 
 function atualizarDispositivo(idFuncionario, hostName){
-   const query = `INSERT INTO usuario_maquina VALUES (null, ${idFuncionario}, (select id from dispositivo where host_name = '${hostName}'), NOW(), 1)`;
+   const query = `INSERT INTO usuario_maquina (fk_usuario, fk_dispositivo, data_hora, ativo) VALUES (${idFuncionario}, (select id from dispositivo where host_name = '${hostName}'), NOW(), 1)`;
    return database.executar(query);
 }
 
