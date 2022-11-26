@@ -28,7 +28,7 @@
     <title>SA Ponto</title>
   </head>
 
-  <body id="body">
+<body id="body" onload="filterUser(), filterUserDash(), startDash()">
     <div id="preloader">
       <div class="inner">
         <!-- HTML DA ANIMAÇÃO MUITO LOUCA DO SEU PRELOADER! -->
@@ -40,129 +40,130 @@
       </div>
     </div>
     <div class="navigation">
-      <div class="menuToggle"></div>
-      <ul>
-        <li class="list active">
-          <a>
-            <span class="icon">
-              <ion-icon name="podium" onclick="iconeDados()"></ion-icon>
-            </span>
-            <span class="text" onclick="iconeDados()">Dados</span>
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="list active">
-          <a>
-            <span class="icon">
-              <ion-icon name="alarm" onclick="iconePonto()"></ion-icon>
-            </span>
-            <span class="text" onclick="iconePonto()">Ponto</span>
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="list">
-          <a>
-            <span class="icon">
-              <ion-icon name="people" onclick="iconeUser()"></ion-icon>
-            </span>
-            <span class="text" onclick="iconeUser()">Usuarios</span>
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="list">
-          <a>
-            <span class="icon">
-              <ion-icon name="tv" onclick="iconeDevice()"></ion-icon>
-            </span>
-            <span class="text" onclick="iconeUser()">Usuarios</span>
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="list">
-          <a>
-            <span class="icon">
-              <ion-icon name="power" onclick="logout()"></ion-icon>
-            </span>
-            <span class="text" onclick="logout()">Sair</span>
-          </a>
-        </li>
-      </ul>
+        <div class="menuToggle"></div>
+        <ul>
+            <li class="list active">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="podium" onclick="iconeDados()"></ion-icon>
+                    </span>
+                    <span class="text" onclick="iconeDados()">Dados</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list active">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="alarm" onclick="iconePonto()"></ion-icon>
+                    </span>
+                    <span class="text" onclick="iconePonto()">Ponto</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="people" onclick="iconeUser()"></ion-icon>
+                    </span>
+                    <span class="text"  onclick="iconeUser()">Usuarios</span>
+                </a>
+            </li>
+        </ul>
+          <ul>
+            <li class="list">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="tv" onclick="iconeDevice()"></ion-icon>
+                    </span>
+                    <span class="text"  onclick="iconeUser()">Maquinas</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li class="list">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="power" onclick="logout()"></ion-icon>
+                    </span>
+                    <span class="text" onclick="logout()">Sair</span>
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div id="chartBox">
-      <div id="title">
-        <h2 id="toTheTop">Métricas de uso - Hardware</h2>
-        <div id="filterUsers">
-          <label for="">Selecione o Colaborador</label>
-          <select id="selectUser" onclick="filterUser()" onchange="update()">
-            <option value="" disabled selected hidden>- - Selecione - -</option>
-          </select>
+        <div id="title">
+            <h2 id="toTheTop">Métricas de uso - Hardware</h2>
+            <div id="filterUsers">
+                <label for="">Selecione o Colaborador</label>
+                <select id="selectColaborator" onclick="filterUser(), filterUserDash()" onchange="update()">
+                    <option id="userAtual" value="myUser">Meu Usuario</option>
+                </select>
+            </div>
         </div>
-      </div>
-      <div id="chartBox_line">
-        <div class="data_box" id="cpuChartBox">
-          <div style="width: 200px">
-            <canvas id="cpuChart"></canvas>
-          </div>
-          <div class="textData">
-            <h3>CPU</h3>
-            <p id="cpuPercentageUsage">40%</p>
-          </div>
+        <div id="chartBox_line">
+            <div class="data_box" id="cpuChartBox">
+                <div style="width: 200px">
+                    <canvas id="cpuChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>CPU</h3>
+                    <p id="cpuPercentageUsage">40%</p>
+                </div>
+            </div>
+            <div class="data_box" id="ramChartBox">
+                <div style="width: 200px">
+                    <canvas id="ramChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>RAM</h3>
+                    <p id="ramPercentageUsage">40%</p>
+                    <b id="ramGb">8.0/16.0GB</b>
+                </div>
+            </div>
         </div>
-        <div class="data_box" id="ramChartBox">
-          <div style="width: 200px">
-            <canvas id="ramChart"></canvas>
-          </div>
-          <div class="textData">
-            <h3>RAM</h3>
-            <p id="ramPercentageUsage">40%</p>
-            <b id="ramGb">8.0/16.0GB</b>
-          </div>
-        </div>
-        <div class="data_box" id="ramProcChartBox">
-          <div style="width: 200px">
-            <canvas id="ramProcChart"></canvas>
-          </div>
-          <div class="textData">
-            <h3 title="Memória consumida por processos">RAM PROC</h3>
-            <p id="ramProcPercentageUsage">15%</p>
-            <b id="ramProcGb">2.5/16.0GB</b>
-          </div>
-        </div>
-      </div>
-      <div id="chartBox_line2">
-        <div class="data_box" id="cpuTempChartBox">
-          <div style="width: 200px">
-            <canvas id="cpuTempChart"></canvas>
-          </div>
-          <div class="textData">
-            <h3>CPU TEMP.</h3>
-            <p id="cpuTempCelsius">43°C</p>
-          </div>
-        </div>
-        <div class="data_box" id="discChartBox">
-          <div style="width: 200px">
-            <canvas id="discChart"></canvas>
-          </div>
-          <div class="textData">
-            <h3>DISCO 1</h3>
-            <p id="discPercentageUsage">25%</p>
-            <b id="discGb">60/240GB</b>
-          </div>
-        </div>
-        <div class="data_box" id="disc2ChartBox">
-          <div style="width: 200px">
-            <canvas id="disc2Chart"></canvas>
-          </div>
-          <div class="textData">
-            <h3>DISCO 2</h3>
-            <p id="disc2PercentageUsage">50%</p>
-            <b id="disc2Gb">250/500GB</b>
-          </div>
+        <div id="chartBox_line2">
+            <div class="data_box" id="ramProcChartBox">
+                <div style="width: 200px">
+                    <canvas id="ramProcChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3 title="Memória consumida por processos">RAM PROC</h3>
+                    <p id="ramProcPercentageUsage">15%</p>
+                    <b id="ramProcGb">2.5/16.0GB</b>
+                </div>
+            </div>
+            <div class="data_box" id="cpuTempChartBox" style="display: none;">
+                <div style="width: 200px">
+                    <canvas id="cpuTempChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>CPU TEMP.</h3>
+                    <p id="cpuTempCelsius">43°C</p>
+                </div>
+            </div>
+            <div class="data_box" id="discChartBox">
+                <div style="width: 200px">
+                    <canvas id="discChart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>DISCO 1</h3>
+                    <p id="discPercentageUsage">25%</p>
+                    <b id="discGb">60/240GB</b>
+                </div>
+            </div>
+            <div class="data_box" id="disc2ChartBox" style="display: none;">
+                <div style="width: 200px">
+                    <canvas id="disc2Chart"></canvas>
+                </div>
+                <div class="textData">
+                    <h3>DISCO 2</h3>
+                    <p id="disc2PercentageUsage">50%</p>
+                    <b id="disc2Gb">250/500GB</b>
+                </div>
+            </div>
         </div>
       </div>
     </div>
@@ -471,7 +472,6 @@
 <script src="../../src/components/Footer/index.js"></script>
 <script src="./script.js"></script>
 <script src="./dynamic-chart.js"></script>
-<script src="./hist-chart.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
@@ -481,3 +481,4 @@
 <script src="relatorioPonto.js"></script>
 
 <script src="filterUser.js"></script>
+<script src="./hist-chart.js"></script>

@@ -15,6 +15,8 @@ router.post("/autenticar", usuarioController.entrar);
 
 router.post("/funcionarios", jwtAuth, usuarioController.listarFuncionarios);
 
+router.post("/dadosDispositivoFuncionario", jwtAuth, usuarioController.listarDadosDispositivoFuncionario);
+
 router.post("/deletar", jwtAuth, usuarioController.delUser);
 
 router.post(

@@ -12,8 +12,8 @@ function filterUser() {
         }).then((response) => {
             response.json().then((dados) => {
                 for (let i = 0; i < dados.length; i++) {
-                    selectUser.innerHTML += `
-                    <option value='${dados[i].id}'>${dados[i].nome}</option>
+                    selectColaborator.innerHTML += `
+                    <option value='${dados[i].nome}'>${dados[i].nome}</option>
                     `
                 }
                 alimentarFiltro++;
@@ -22,3 +22,25 @@ function filterUser() {
         })
     }
 }
+
+function filterUserDash() {
+    let nome = selectColaborator.value;
+    fetch("/usuarios/dadosDispositivoFuncionario", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            token,
+            nome,
+        }),
+    }).then((response) => {
+        response.json().then((dados) => {
+        sessionStorage.UserDash = dados[0].id;
+        });
+    })
+}
+window.onload = setTimeout(() => {
+    filterUserDash(),
+    filterUser()
+  }, 30000)

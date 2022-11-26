@@ -12,7 +12,6 @@ function VerifyJWT(req, res, next) {
   jwt.verify(token, assinature, function (err, decoded) {
     if (err)
       return res.status(500).send({ auth: false, message: "Token é inválido" });
-
     req.userId = decoded.idUser;
     req.nivelAcesso = decoded.idsRelacionados[0].nivel_acesso;
     req.endereco = decoded.idsRelacionados[0].endereco;
