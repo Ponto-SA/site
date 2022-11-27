@@ -4,6 +4,7 @@ token == null ? (window.location.href = "../login/index.html") : "";
 // Function starts
 listarFuncionarios();
 listarDispositivos();
+listarAll();
 
 /*INICIO JAVA SCRIPT NAVBAR*/
 const menuToggle = document.querySelector(".menuToggle");
@@ -119,6 +120,7 @@ function modalAtualizarUser(id, nome, sobrenome, email, status) {
 function atualizarUser() {
   modal2.style.display = "none";
   const isAtivo = attUserAtivo.checked ? 1 : 0;
+  const idCargoFuncionario = cargoFuncionario.checked ? 1 : 2;
   const id = idUser.value;
   const nome = attUserNome.value;
   const sobrenome = attUserSobrenome.value;
@@ -435,4 +437,60 @@ function listarDispositivos() {
       });
     });
   });
+}
+
+function gerarPDF() {
+  var relatorio = tabela_ponto.innerHTML;
+  var doc = new jsPDF();
+  doc.fromHTML(
+    "<h1>**********Relatorio de Ponto*********</h1>" + relatorio,
+    33,
+    2
+  );
+  doc.save("RelatorioPonto.pdf");
+}
+
+function listarAll() {
+  arrayPontos.innerHTML = "";
+  fetch("/ponto/listAll", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+    }),
+  }).then((response) => {
+    response.json().then((dados) => {
+
+      let totalHoras = 0;
+      let banco = 0;
+
+      dados.pontos.forEach((dados) => {
+        console.log(dados);
+
+        totalHoras += dados.hrTrabalhadasNumber;
+        banco += dados.bancoHoras;
+
+        arrayPontos.innerHTML += `
+          <tr id="trPonto">
+            <td>${dados.dia} - ${dados.diaSemana}</td>
+            <td>${dados.inicio}</td>
+            <td>${dados.saida}</td>
+            <td>${dados.horasTrabalhadas}h</td>
+            <td>${dados.bancoHoras}h</td>
+          </tr>
+        `;
+      });
+
+      hr_t.innerHTML = totalHoras + "Hrs";
+      hr_e.innerHTML = banco + "Hrs";
+
+
+    });
+  });
+
+  setTimeout(() => {
+    listarAll();
+  }, 10000);
 }
