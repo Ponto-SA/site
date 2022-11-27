@@ -189,6 +189,7 @@ async function atualizarFuncionario(req, res) {
   const senha = req.body.senha;
   const status = req.body.status;
   const opcao = req.body.opcao;
+  const isGestor = req.body.isGestor;
 
   if (nivelAcesso === 2) {
 
@@ -205,6 +206,9 @@ async function atualizarFuncionario(req, res) {
       status,
       opcao
     );
+
+    await acessoModel.updateNivelAcesso(idFuncionario, isGestor ? 2 : 1);
+
   } else {
     res.json(401).json({ mensagem: "Você não possuí acesso!" });
   }
@@ -236,6 +240,7 @@ async function cadastrarFuncionario(req, res) {
   const endereco = req.endereco;
   const empresa = req.empresa;
 
+  const isGestor = req.body.isGestor;
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
@@ -260,8 +265,8 @@ async function cadastrarFuncionario(req, res) {
 
         const idUser = await usuarioModel.validIsEmail(email);
         const id = idUser[0].id;
+        await acessoModel.inserirAcesso(id, isGestor ? 2 : 1);
         await empresaModel.relacionarDados(id, empresa, endereco);
-        await acessoModel.inserirAcesso(id, 1);
 
         res.json({
           mensagem: "Usuário cadastrado com sucesso!",
