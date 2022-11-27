@@ -34,19 +34,6 @@ res.json({
   }
 }
 
-async function vincularUsuario(id, idDisp) {
-  // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-  const idUsuario = id;
-  const idDispositivo = idDisp;
-
-  // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
- await dispositivoModel.vincularUsuario(idUsuario, idDispositivo);
-
- res.json({
-  mensagem: "mensagem"
- })
-}
-
 function listar(req, res) {
   const iduser = req.userId;
 
