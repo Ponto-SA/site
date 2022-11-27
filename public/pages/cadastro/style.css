@@ -3,6 +3,7 @@
   justify-content: space-around;
   align-items: center;
   padding-top: 200px;
+
 }
 
 #container_register img {
@@ -27,6 +28,7 @@
   background-color: #f1faee;
   border: 4px solid #b58fff;
   border-radius: 40px;
+  width: 800px;
 }
 
 #form_box .form_box2 p {
@@ -65,19 +67,30 @@
 }
 
 #form_box .form_box2 input {
-  border-color: #b58fff;
-  border: none;
-  border-bottom: 3px solid;
   padding: 5px;
-  color: #b58fff;
+  color: #6c757d;
+  height: 40px;
   font-size: 20px;
-  width: 200px;
-  height: 25px;
-  border-radius: 3px;
+  width: 370px;
+  border-radius: 8px;
   background-color: transparent;
-  text-align: center;
   margin-left: 20px;
   margin-right: 20px;
+  border: 2px solid #9c71f3ba;
+}
+
+#form_box .form_box2 input:read-only {
+  padding: 5px;
+  color: rgb(58, 58, 58);
+  background-color: #ced4da;
+  height: 40px;
+  font-size: 20px;
+  width: 370px;
+  border-radius: 8px;
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: not-allowed;
+  border: 2px solid #49505783;
 }
 
 #form_box .form_box2 input:focus {
@@ -111,13 +124,15 @@
 #FocusSenha{
   position: absolute;
   cursor: pointer;
-  margin-left: 190px;
+  margin-left: 350px;
+  margin-top: 10px;
   color: #9c71f3;  
 }
 
 #FocusSenha1{
   position: absolute;
-  margin-left: 190px;
+  margin-left: 350px;
+  margin-top: 10px;
   cursor: pointer;
   color: #9c71f3;  
 }
