@@ -52,17 +52,16 @@
 }
 
 #form_box .form_box2 input {
-  border-color: #b58fff;
-  border: none;
-  border-bottom: 3px solid;
   padding: 5px;
-  color: #b58fff;
-  font-size: 18px;
-  width: 55%;
-  text-align: center;
-  height: 25px;
-  border-radius: 3px;
+  color: #6c757d;
+  height: 40px;
+  font-size: 20px;
+  width: 370px;
+  border-radius: 8px;
   background-color: transparent;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 2px solid #9c71f3ba;
 }
 
 #form_box .form_box2 input:focus {
