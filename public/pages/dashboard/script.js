@@ -120,7 +120,8 @@ function modalAtualizarUser(id, nome, sobrenome, email, status) {
 function atualizarUser() {
   modal2.style.display = "none";
   const isAtivo = attUserAtivo.checked ? 1 : 0;
-  const idCargoFuncionario = cargoFuncionario.checked ? 1 : 2;
+  const isGestor = cargoGestorAtt.checked ? true : false;
+
   const id = idUser.value;
   const nome = attUserNome.value;
   const sobrenome = attUserSobrenome.value;
@@ -145,6 +146,7 @@ function atualizarUser() {
         senha,
         status: isAtivo,
         opcao,
+        isGestor
       }),
     })
       .then(() => {
@@ -195,7 +197,6 @@ function deletarUser(id, email) {
 
 function modalAtualizarDispositivo(hostname, id) {
   modalDispositivo2.style.display = "block";
-  console.log(hostname);
   attHostname.value = hostname;
   attId.value = id;
 }
@@ -207,9 +208,11 @@ function cadastrarUser() {
   const senha = newSenha.value;
   const confirmSenha = newConfirmSenha.value;
 
+  const isGestor = cargoGestor.checked ? true : false;
+
   const senhaCorret = senha === confirmSenha ? true : false;
 
-  if (senhaCorret) {
+  if (senhaCorret && email.length > 0) {
     fetch("/usuarios/cadastrarFuncionario", {
       method: "POST",
       headers: {
@@ -221,6 +224,7 @@ function cadastrarUser() {
         lastname: sobrenome,
         email,
         senha,
+        isGestor
       }),
     })
       .then((res) => {
@@ -241,6 +245,7 @@ function atualizarDispositivo() {
   idUsuario = selectUsers2.value;
   hostName = attHostname.value;
   idDispositivo = attId.value;
+
 
   fetch("/dispositivos/atualizarDispositivo", {
     method: "POST",

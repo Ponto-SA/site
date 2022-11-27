@@ -5,6 +5,12 @@ function inserirAcesso(idUser, idAcesso) {
     return database.executar(query);
 }
 
+function updateNivelAcesso(idUser, idAcesso){
+  const query = `UPDATE usuario_nivel_acesso SET fk_nivel = ${idAcesso} WHERE fk_usuario = ${idUser}`;
+  return database.executar(query);
+}
+
 module.exports = {
   inserirAcesso,
+  updateNivelAcesso
 };

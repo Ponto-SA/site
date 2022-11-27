@@ -8,14 +8,14 @@ function cadastrar(id, marca, modelo, hostName) {
    return database.executar(query);
 }
 function vincularUsuario(id, idDispositivo) {
-  const query = `INSERT INTO usuario_maquina VALUES (null, '${id}', '${idDispositivo}', GETDATE(), 1);`;
+  const query = `INSERT INTO usuario_maquina VALUES (null, '${id}', '${idDispositivo}', NOW(), 1);`;
    return database.executar(query);
 }
 function listar(idUser) {
   const query = `SELECT usuario_maquina.id, dispositivo.id, marca, modelo, host_name, nome, sobrenome FROM usuario_maquina 
   INNER JOIN dispositivo on dispositivo.id = usuario_maquina.fk_dispositivo
   INNER JOIN usuario on usuario.id = usuario_maquina.fk_usuario
-  WHERE ativo = 1 and fk_chefe = ${idUser} and data_hora <= GETDATE() order by data_hora desc;`;
+  WHERE ativo = 1 and fk_chefe = ${idUser} and data_hora <= NOW() order by data_hora desc;`;
    return database.executar(query);
 }
 
@@ -25,17 +25,17 @@ function listarDispositivo(hostname){
 }
 
 function atualizarUpdate(idFuncionario){
-  const query = `update usuario_maquina set ativo = 0 where fk_usuario = ${idFuncionario} and data_hora <= GETDATE();`;
+  const query = `update usuario_maquina set ativo = 0 where fk_usuario = ${idFuncionario} and data_hora <= NOW();`;
   return database.executar(query);
 }
 
 function atualizarUpdate2(id){
-  const query = `update usuario_maquina set ativo = 0 where fk_dispositivo = ${id} and data_hora <= GETDATE();`;
+  const query = `update usuario_maquina set ativo = 0 where fk_dispositivo = ${id} and data_hora <= NOW();`;
   return database.executar(query);
 }
 
 function atualizarDispositivo(idFuncionario, hostName){
-   const query = `INSERT INTO usuario_maquina VALUES (null, ${idFuncionario}, (select id from dispositivo where host_name = '${hostName}'), GETDATE(), 1)`;
+   const query = `INSERT INTO usuario_maquina VALUES (null, ${idFuncionario}, (select id from dispositivo where host_name = '${hostName}'), NOW(), 1)`;
    return database.executar(query);
 }
 
