@@ -1,7 +1,6 @@
 const associativaModel = require("../models/associativasModel");
 const dispositivoModel = require("../models/dispositivoModel");
 
-
 function testar(req, res) {
   console.log("ENTRAMOS NA usuarioController");
   res.json("ESTAMOS FUNCIONANDO!");
@@ -19,23 +18,20 @@ async function cadastrar(req, res) {
     res.status(400).send("Seu nome está invalido!");
   } else {
     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-    dispositivoModel.cadastrar(id, marca, modelo, hostName).then((response) => {
-      res.status(200).json(response);
-      dispositivoModel.atualizarUpdate(id);
-      dispositivoModel.vincularUsuario(id, response.insertId);
-    });
+    await dispositivoModel.cadastrar(id, marca, modelo, hostName);
+
+    const response = await dispositivoModel.listarDispositivo(hostName);
+
+    const idMaquina = response[0].id;
+
+    await dispositivoModel.atualizarUpdate(id);
+    await dispositivoModel.vincularUsuario(id,idMaquina);
+
+res.json({
+  mensagem: "atualizar"
+})
+
   }
-}
-
-async function vincularUsuario(id, idDisp) {
-  // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-  const idUsuario = id;
-  const idDispositivo = idDisp;
-
-  // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-  dispositivoModel.cadastrar(id, marca, modelo, hostName).then((response) => {
-    idDispositivo = res.status(200).json(response.insertId);
-  });
 }
 
 function listar(req, res) {
@@ -99,13 +95,11 @@ function atualizarUpdate2(req, res) {
   }
 }
 
-async function deletarDipositivo(req, res){
-
+async function deletarDipositivo(req, res) {
   const nivelAcesso = req.nivelAcesso;
   const hostaname = req.body.hostname;
 
-  if(nivelAcesso === 2){
-
+  if (nivelAcesso === 2) {
     const result = await dispositivoModel.listarDispositivo(hostaname);
     const idDispositivo = result[0].id;
     await associativaModel.del_user_maquina(idDispositivo);
@@ -113,12 +107,11 @@ async function deletarDipositivo(req, res){
 
     res.json({
       mensagem: "Dispositivo deletado com sucesso!",
-    })
-
-  }else {
+    });
+  } else {
     res.status(401).json({
-      mensagem: "Você não tem autorização."
-    })
+      mensagem: "Você não tem autorização.",
+    });
   }
 }
 
@@ -130,5 +123,5 @@ module.exports = {
   atualizarDispositivo,
   atualizarUpdate,
   atualizarUpdate2,
-  deletarDipositivo
+  deletarDipositivo,
 };
