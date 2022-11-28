@@ -38,6 +38,16 @@ function deleteEndereco(idEndereco){
     return database.executar(query);
 }
 
+function desabilitarFK() {
+    const query = `ALTER TABLE empresa_usuario
+    NOCHECK CONSTRAINT ALL;`;
+    return database.executar(query);
+}
+function reabilitarFK() {
+    const query = `ALTER TABLE empresa_usuario
+    CHECK CONSTRAINT ALL;`;
+    return database.executar(query);
+}
 
 module.exports = {
     listarUnicoIdEndereco,
@@ -45,7 +55,9 @@ module.exports = {
     listarAll,
     novoEndereco,
     updateEndereco,
-    deleteEndereco
+    deleteEndereco,
+    desabilitarFK,
+    reabilitarFK
 }
 
 

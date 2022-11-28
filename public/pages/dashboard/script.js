@@ -234,8 +234,9 @@ function modalAtualizarDispositivo(hostname, id) {
   attId.value = id;
 }
 
-function modalAtualizarEndereco() {
+function modalAtualizarEndereco(cep) {
   modalEndereco2.style.display = "block";
+  cepEmpresa.value = cep;
 }
 
 function cadastrarUser() {
@@ -377,21 +378,17 @@ function listarFuncionarios() {
                         <p>Nome: <span>${dados.nome}</span></p>
                         <p>Sobrenome: <span>${dados.sobrenome}</span></p>
                         <p>Email: <span>${dados.email}</span></p>
-                        <p>Funcionario ativo: <span>${
-                          dados.status === 1 ? "Sim" : "Não"
-                        }</span></p>
+                        <p>Funcionario ativo: <span>${dados.status === 1 ? "Sim" : "Não"
+          }</span></p>
                     </div>
                         <div id="editUser">
-                            <ion-icon name="create" onclick="modalAtualizarUser(${
-                              dados.id
-                            }, '${dados.nome}', '${dados.sobrenome}', '${
-          dados.email
-        }', ${dados.status})"></ion-icon>
+                            <ion-icon name="create" onclick="modalAtualizarUser(${dados.id
+          }, '${dados.nome}', '${dados.sobrenome}', '${dados.email
+          }', ${dados.status})"></ion-icon>
                         </div>
                         <div id="editUser">
-                            <ion-icon name="trash" onclick="deletarUser(${
-                              dados.id
-                            }, '${dados.email}')"></ion-icon>
+                            <ion-icon name="trash" onclick="deletarUser(${dados.id
+          }, '${dados.email}')"></ion-icon>
                         </div>
                 </div>
                 `;
@@ -406,15 +403,15 @@ function cadastrarDipositivo() {
   let hostName = String(addHostName.value.trim());
   let idUsuario = Number(selectUsers.value);
 
-  if(idUsuario == 0){
+  if (idUsuario == 0) {
     Swal.fire("Colaborador não informado !");
-  }else if(marca.length <= 2){
+  } else if (marca.length <= 2) {
     Swal.fire("Marca com menos de 3 caracteres !");
-  }else if(modelo.length <= 2){
+  } else if (modelo.length <= 2) {
     Swal.fire("Modelo com menos de 3 caracteres !");
-  }else if(hostName.length <= 2){
+  } else if (hostName.length <= 2) {
     Swal.fire("Hostname com menos de 3 caracteres !");
-  }else{
+  } else {
     fetch("/dispositivos/cadastrar", {
       method: "POST",
       headers: {
@@ -429,9 +426,9 @@ function cadastrarDipositivo() {
     })
       .then((response) => {
         response.json().then((dados) => {
-          console.log(dados);
+
         });
-  
+
         if (response.ok) {
           Swal.fire("Dispositivo cadastrado com sucesso!");
           listarDispositivos();
@@ -440,7 +437,7 @@ function cadastrarDipositivo() {
           response.json().then((dados) => {
             Swal.fire(`${dados.mensagem}`, "", "error");
           });
-  
+
           addMarca.value = "";
           addModelo.value = "";
           addHostName.value = "";
@@ -490,19 +487,169 @@ function listarDispositivos() {
   });
 }
 /*Funções para o endereço*/
-
 function listarEndereco() {
+  fetch("/endereco/listAll", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+    }),
+  }).then((response) => {
+    response.json().then((dados) => {
+
+      cardsAddress.innerHTML = "";
+      dados.empresas.forEach((dados) => {
+        cardsAddress.innerHTML += `
+        <div id="cardAddress">
+          <div id="infoAddress">
+            <h3>Dados Endereço:</h3>
+            <p>Rua: <span>${dados.rua}</span></p>
+            <p>Numero: <span>${dados.numero}</span></p>
+            <p>Bairro: <span>${dados.bairro}</span></p>
+            <p>Cep: <span id="cepEmpresa">${dados.cep}</span></p>
+            <p>Cidade: <span>${dados.cidade}</span></p>
+            <p>UF: <span>${dados.uf}</span></p>
+          </div>
+          <div id="editAddress">
+            <ion-icon name="create" onclick="modalAtualizarEndereco('${dados.cep}')"></ion-icon>
+          </div>
+          <div id="editAddress">
+            <ion-icon name="trash" onclick="deletarEndereco('${dados.cep}')"></ion-icon>
+          </div>
+        </div>
+        `
+      })
+    })
+  })
 }
 
 function atualizarEndereco() {
+  let rua = addRuaUpdate.value;
+  let numero = addNumeroUpdate.value;
+  let bairro = addBairroUpdate.value;
+  let cidade = addCidadeUpdate.value;
+  let uf = addUfUpdate.value;
+  let cepModal = addCepUpdate.value;
+  let cep = cepEmpresa.value;
+  if (rua.length < 1) {
+    Swal.fire("Por favor informe a Rua !");
+  } else if (numero.length < 1) {
+    Swal.fire("Por favor informe o Numero !");
+  } else if (bairro.length < 1) {
+    Swal.fire("Por favor informe o Bairro !");
+  } else if (cepModal.length < 8) {
+    Swal.fire("CPF com menos de 8 caracteres !");
+  } else if (cidade.length < 1) {
+    Swal.fire("Por favor informe a Cidade !");
+  } else if (uf.length < 1) {
+    Swal.fire("Por favor informe o UF !");
+  } else {
+    fetch("/endereco/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token,
+        rua,
+        numero,
+        bairro,
+        cep,
+        cepModal,
+        cidade,
+        uf,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          Swal.fire("Endereço atualizado com sucesso!", "", "success");
+          listarEndereco();
+          myModalEndereco2.style.display = "none";
+        } else {
+          response.json().then((dados) => {
+            Swal.fire(`Falha ao atualizar !`, "", "error");
+          });
+        }
+        addRuaUpdate.value = "";
+        addNumeroUpdate.value = "";
+        addBairroUpdate.value = "";
+        addCepUpdate.value = "";
+        addCidadeUpdate.value = "";
+        addUfUpdate.value = "";
+      })
+      .catch((error) => {
+        console.log(`#ERRO: ${error}`);
+      });
+  }
 }
 
 function cadastrarEndereco() {
-  alert("Cadastrado!")
+  let rua = addRua.value;
+  let numero = addNumero.value;
+  let bairro = addBairro.value;
+  let cep = addCep.value;
+  let cidade = addCidade.value;
+  let uf = addUF.value;
+
+  if (rua.length < 1) {
+    Swal.fire("Por favor informe a Rua !");
+  } else if (numero.length < 1) {
+    Swal.fire("Por favor informe o Numero !");
+  } else if (bairro.length < 1) {
+    Swal.fire("Por favor informe o Bairro !");
+  } else if (cep.length < 8) {
+    Swal.fire("CPF com menos de 8 caracteres !");
+  } else if (cidade.length < 1) {
+    Swal.fire("Por favor informe a Cidade !");
+  } else if (uf.length < 1) {
+    Swal.fire("Por favor informe o UF !");
+  } else {
+    fetch("/endereco/novo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token,
+        rua,
+        numero,
+        bairro,
+        cep,
+        cidade,
+        uf,
+      }),
+    }).then((response) => {
+      response.json().then((dados) => {
+
+      });
+
+      if (response.ok) {
+        Swal.fire("Endereço cadastrado com sucesso!");
+        listarEndereco();
+        myModalEndereco.style.display = "none";
+      } else {
+        response.json().then((dados) => {
+          Swal.fire(`Tente novamente !`, "", "error");
+        });
+
+        addRua.value = "";
+        addNumero.value = "";
+        addBairro.value = "";
+        addCep.value = "";
+        addCidade.value = "";
+        addUF.value = "";
+      }
+    })
+      .catch((error) => {
+        console.log(`#ERRO: ${error}`);
+      });
+  }
 }
 
-function deletarEndereco() {
-  let cep = Number(cepEmpresa.innerHTML);
+function deletarEndereco(cep) {
+
   Swal.fire({
     title: "Deletar este endereço ?",
     text: "Digite o cep para deletar !",
@@ -529,10 +676,10 @@ function deletarEndereco() {
       }).then((response) => {
         response.json().then((dados) => {
           if (response.ok) {
-            Swal.fire(`${dados.mensagem}`, "", "success");
-            listarDispositivos();
+            Swal.fire(`Sucesso !`, "", "success");
+            listarEndereco();
           } else {
-            Swal.fire(`${dados.mensagem}`, "", "error");
+            Swal.fire(`Algo deu errado`, "", "error");
           }
         });
       });
@@ -571,7 +718,6 @@ function listarAll() {
       let banco = 0;
 
       dados.pontos.forEach((dados) => {
-        console.log(dados);
 
         totalHoras += dados.hrTrabalhadasNumber;
         banco += dados.bancoHoras;

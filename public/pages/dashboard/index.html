@@ -76,9 +76,9 @@
       <li class="list">
         <a>
           <span class="icon">
-            <ion-icon name="navigate" onclick="iconeAddress()"></ion-icon>
+            <ion-icon name="navigate" onclick="iconeAddress(), listarEndereco()"></ion-icon>
           </span>
-          <span class="text" onclick="iconeAddress()">Endereço</span>
+          <span class="text" onclick="iconeAddress(), listarEndereco()">Endereço</span>
         </a>
       </li>
     </ul>
@@ -425,23 +425,6 @@
 
       <!-- Card render -->
       <div id="cardsAddress">
-        <div id="cardAddress">
-          <div id="infoAddress">
-              <h3>Dados Endereço:</h3>
-              <p>Rua: <span>Nelson Ferreira</span></p>
-              <p>Numero: <span>179</span></p>
-              <p>Bairro: <span>Jardim Vassoura 1</span></p>
-              <p>Cep: <span id="cepEmpresa">07952150</span></p>
-              <p>Cidade: <span>Francisco Morato</span></p>
-              <p>UF: <span>SP</span></p>
-          </div>
-              <div id="editAddress">
-                  <ion-icon name="create" onclick="modalAtualizarEndereco()"></ion-icon>
-              </div>
-              <div id="editAddress">
-                  <ion-icon name="trash" onclick="deletarEndereco()"></ion-icon>
-              </div>
-      </div>
       </div>
     </div>
   </div>
@@ -464,7 +447,7 @@
         <input id="addUF" type="text" />
       </div>
       <div id="btnAddress">
-        <button onclick="deletarEndereco()">Cadastrar</button>
+        <button onclick="cadastrarEndereco()">Cadastrar</button>
       </div>
     </div>
   </div>
@@ -474,15 +457,19 @@
       <h3>Atualizar endereço da empresa</h3>
       <div id="createDevice">
         <label for="">Rua:</label>
-        <input id="addRua" type="text" />
+        <input id="addRuaUpdate" type="text" />
         <label for="">Numero:</label>
-        <input id="addNumero" type="text" />
+        <input id="addNumeroUpdate" type="text" />
         <label for="">Bairro:</label>
-        <input id="addBairro" type="text" />
+        <input id="addBairroUpdate" type="text" />
         <label for="">Cep:</label>
-        <input id="addCep" type="text" />
+        <input id="addCepUpdate" type="text" />
+        <label for="">Cidade:</label>
+        <input id="addCidadeUpdate" type="text" />
+        <label for="">UF:</label>
+        <input id="addUfUpdate" type="text" />
         <div id="btnAddress">
-          <button onclick="atualizarDispositivo()">Atualizar</button>
+          <button onclick="atualizarEndereco()">Atualizar</button>
         </div>
       </div>
     </div>
