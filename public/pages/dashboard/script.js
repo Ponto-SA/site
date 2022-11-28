@@ -27,6 +27,7 @@ function iconeDados() {
   telaDePonto.style.display = "none";
   telaDeUsuarios.style.display = "none";
   telaDeDispositivos.style.display = "none";
+  telaDeEndereco.style.display = "none";
 }
 
 function iconePonto() {
@@ -61,7 +62,6 @@ function iconeAddress() {
   telaDeUsuarios.style.display = "none";
   telaDeDispositivos.style.display = "none";
   telaDeEndereco.style.display = "";
-
 }
 function logout() {
   sessionStorage.clear();
@@ -502,7 +502,44 @@ function cadastrarEndereco() {
 }
 
 function deletarEndereco() {
-  alert("Deletado!")
+  let cep = Number(cepEmpresa.innerHTML);
+  Swal.fire({
+    title: "Deletar este endereço ?",
+    text: "Digite o cep para deletar !",
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "Ops, Cancelar!",
+    confirmButtonText: "Ok, Pode Deletar!",
+  }).then((result) => {
+    if (result.value == cep) {
+      fetch("/endereco/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+          cep
+        }),
+      }).then((response) => {
+        response.json().then((dados) => {
+          if (response.ok) {
+            Swal.fire(`${dados.mensagem}`, "", "success");
+            listarDispositivos();
+          } else {
+            Swal.fire(`${dados.mensagem}`, "", "error");
+          }
+        });
+      });
+    } else {
+      Swal.fire(`cep incorreto!`, "", "error");
+    }
+  });
 }
 
 /*Termino Funções para o endereço*/
