@@ -431,7 +431,7 @@
               <p>Rua: <span>Nelson Ferreira</span></p>
               <p>Numero: <span>179</span></p>
               <p>Bairro: <span>Jardim Vassoura 1</span></p>
-              <p>Cep: <span>07952150</span></p>
+              <p>Cep: <span id="cepEmpresa">07952150</span></p>
               <p>Cidade: <span>Francisco Morato</span></p>
               <p>UF: <span>SP</span></p>
           </div>
@@ -439,7 +439,7 @@
                   <ion-icon name="create" onclick="modalAtualizarEndereco()"></ion-icon>
               </div>
               <div id="editAddress">
-                  <ion-icon name="trash" onclick="atualizarEndereco()"></ion-icon>
+                  <ion-icon name="trash" onclick="deletarEndereco()"></ion-icon>
               </div>
       </div>
       </div>
@@ -471,7 +471,7 @@
   <div id="myModalEndereco2" class="modal">
     <div class="modal-content">
       <span class="closeModalEndereco2">&times;</span>
-      <h3>Atualizar colaborador do dispositivo</h3>
+      <h3>Atualizar endereço da empresa</h3>
       <div id="createDevice">
         <label for="">Rua:</label>
         <input id="addRua" type="text" />
@@ -481,10 +481,6 @@
         <input id="addBairro" type="text" />
         <label for="">Cep:</label>
         <input id="addCep" type="text" />
-        <label for="">Cidade:</label>
-        <input id="addCidade" type="text" />
-        <label for="">UF:</label>
-        <input id="addUF" type="text" />
         <div id="btnAddress">
           <button onclick="atualizarDispositivo()">Atualizar</button>
         </div>
