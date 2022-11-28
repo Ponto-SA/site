@@ -208,7 +208,7 @@ async function atualizarFuncionario(req, res) {
     );
 
     await acessoModel.updateNivelAcesso(idFuncionario, isGestor ? 2 : 1);
-
+      
   } else {
     res.json(401).json({ mensagem: "Você não possuí acesso!" });
   }
