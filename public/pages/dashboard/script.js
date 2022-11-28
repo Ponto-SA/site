@@ -35,6 +35,7 @@ function iconePonto() {
   telaDePonto.style.display = "";
   telaDeUsuarios.style.display = "none";
   telaDeDispositivos.style.display = "none";
+  telaDeEndereco.style.display = "none";
 }
 
 function iconeUser() {
@@ -43,6 +44,7 @@ function iconeUser() {
   telaDePonto.style.display = "none";
   telaDeUsuarios.style.display = "";
   telaDeDispositivos.style.display = "none";
+  telaDeEndereco.style.display = "none";
 }
 function iconeDevice() {
   chartBox.style.display = "none";
@@ -50,6 +52,16 @@ function iconeDevice() {
   telaDePonto.style.display = "none";
   telaDeUsuarios.style.display = "none";
   telaDeDispositivos.style.display = "";
+  telaDeEndereco.style.display = "none";
+}
+function iconeAddress() {
+  chartBox.style.display = "none";
+  chartBox2.style.display = "none";
+  telaDePonto.style.display = "none";
+  telaDeUsuarios.style.display = "none";
+  telaDeDispositivos.style.display = "none";
+  telaDeEndereco.style.display = "";
+
 }
 function logout() {
   sessionStorage.clear();
@@ -101,6 +113,27 @@ spanDevice.onclick = function () {
 };
 spanDevice2.onclick = function () {
   modalDispositivo2.style.display = "none";
+};
+
+/*FIM MODAL*/
+
+/*MODAL ENDERECO*/
+var modalEndereco = document.getElementById("myModalEndereco");
+var modalEndereco2 = document.getElementById("myModalEndereco2");
+var btnAddress = document.getElementById("myBtnAddress");
+var btnAddress2 = document.getElementById("myBtnAddress2");
+var spanAddress = document.getElementsByClassName("closeModalEndereco")[0];
+var spanAddress2 = document.getElementsByClassName("closeModalEndereco2")[0];
+
+btnAddress.onclick = function () {
+  modalEndereco.style.display = "block";
+};
+
+spanAddress.onclick = function () {
+  modalEndereco.style.display = "none";
+};
+spanAddress2.onclick = function () {
+  modalEndereco2.style.display = "none";
 };
 
 /*FIM MODAL*/
@@ -201,6 +234,10 @@ function modalAtualizarDispositivo(hostname, id) {
   attId.value = id;
 }
 
+function modalAtualizarEndereco() {
+  modalEndereco2.style.display = "block";
+}
+
 function cadastrarUser() {
   const nome = newNome.value;
   const sobrenome = newSobrenome.value;
@@ -244,7 +281,7 @@ function cadastrarUser() {
 function atualizarDispositivo() {
   idUsuario = selectUsers2.value;
   hostName = attHostname.value;
-  idDispositivo = attId.value;
+  idDispositivo = Number(attId.value);
 
 
   fetch("/dispositivos/atualizarDispositivo", {
@@ -261,7 +298,7 @@ function atualizarDispositivo() {
   })
     .then((response) => {
       if (response.ok) {
-        Swal.fire("Dispositivo cadastrado com sucesso!", "", "success");
+        Swal.fire("Dispositivo atualizado com sucesso!", "", "success");
         modalDispositivo2.style.display = "none";
         listarDispositivos();
       } else {
@@ -369,41 +406,50 @@ function cadastrarDipositivo() {
   let hostName = String(addHostName.value.trim());
   let idUsuario = Number(selectUsers.value);
 
-  fetch("/dispositivos/cadastrar", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      idUsuario,
-      marca,
-      modelo,
-      hostName,
-    }),
-  })
-    .then((response) => {
-      response.json().then((dados) => {
-        console.log(dados);
-      });
-
-      if (response.ok) {
-        Swal.fire("Dispositivo cadastrado com sucesso!");
-        listarDispositivos();
-        myModalDispositivo.style.display = "none";
-      } else {
-        response.json().then((dados) => {
-          Swal.fire(`${dados.mensagem}`, "", "error");
-        });
-
-        addMarca.value = "";
-        addModelo.value = "";
-        addHostName.value = "";
-      }
+  if(idUsuario == 0){
+    Swal.fire("Colaborador não informado !");
+  }else if(marca.length <= 2){
+    Swal.fire("Marca com menos de 3 caracteres !");
+  }else if(modelo.length <= 2){
+    Swal.fire("Modelo com menos de 3 caracteres !");
+  }else if(hostName.length <= 2){
+    Swal.fire("Hostname com menos de 3 caracteres !");
+  }else{
+    fetch("/dispositivos/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idUsuario,
+        marca,
+        modelo,
+        hostName,
+      }),
     })
-    .catch((error) => {
-      console.log(`#ERRO: ${error}`);
-    });
-
+      .then((response) => {
+        response.json().then((dados) => {
+          console.log(dados);
+        });
+  
+        if (response.ok) {
+          Swal.fire("Dispositivo cadastrado com sucesso!");
+          listarDispositivos();
+          myModalDispositivo.style.display = "none";
+        } else {
+          response.json().then((dados) => {
+            Swal.fire(`${dados.mensagem}`, "", "error");
+          });
+  
+          addMarca.value = "";
+          addModelo.value = "";
+          addHostName.value = "";
+        }
+      })
+      .catch((error) => {
+        console.log(`#ERRO: ${error}`);
+      });
+  }
   return false;
 }
 
@@ -443,7 +489,23 @@ function listarDispositivos() {
     });
   });
 }
+/*Funções para o endereço*/
 
+function listarEndereco() {
+}
+
+function atualizarEndereco() {
+}
+
+function cadastrarEndereco() {
+  alert("Cadastrado!")
+}
+
+function deletarEndereco() {
+  alert("Deletado!")
+}
+
+/*Termino Funções para o endereço*/
 function gerarPDF() {
   var relatorio = tabela_ponto.innerHTML;
   var doc = new jsPDF();
@@ -494,8 +556,4 @@ function listarAll() {
 
     });
   });
-
-  setTimeout(() => {
-    listarAll();
-  }, 10000);
 }

@@ -43,4 +43,4 @@ function filterUserDash() {
 window.onload = setTimeout(() => {
     filterUserDash(),
     filterUser()
-  }, 30000)
+  }, 1000)

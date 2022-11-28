@@ -1,54 +1,54 @@
 const database = require("../database/config");
 
 function getCpuUsage(id) {
-    const query = `SELECT * FROM historico WHERE fk_dispositivo = ${id} AND fk_tipo_metrica = 1
-     ORDER BY historico.id DESC LIMIT 1 ;`;
+    const query = `SELECT top(1) * FROM historico WHERE fk_dispositivo = ${id} AND fk_tipo_metrica = 1
+     ORDER BY historico.id DESC   ;`;
     return database.executar(query);
   }
 
   function getRamUsage(id) {
-    const query = `SELECT disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
+    const query = `SELECT top(1) disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
     FROM dispositivo AS disp
     JOIN disco ON disp.id = disco.fk_dispositivo 
     JOIN historico ON disp.id = historico.fk_dispositivo
     WHERE historico.fk_dispositivo = ${id} AND fk_tipo_metrica = 2
-    ORDER BY historico.id DESC;`;
+    ORDER BY historico.id DESC   ;`;
     return database.executar(query);
   }
 
   function getRamProcUsage(id) {
-    const query = `SELECT disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
+    const query = `SELECT top(1) disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
     FROM dispositivo AS disp
     JOIN disco ON disp.id = disco.fk_dispositivo 
     JOIN historico ON disp.id = historico.fk_dispositivo
     WHERE historico.fk_dispositivo = ${id} AND fk_tipo_metrica = 5
-    ORDER BY historico.id DESC LIMIT 1  ;`;
+    ORDER BY historico.id DESC   ;`;
     return database.executar(query);
   }
 
   function getCpuTemp(id) {
-    const query = `SELECT * FROM historico WHERE fk_dispositivo = ${id} AND fk_tipo_metrica = 4
-     ORDER BY historico.id DESC LIMIT 1  ;`;
+    const query = `SELECT top(1) * FROM historico WHERE fk_dispositivo = ${id} AND fk_tipo_metrica = 4
+     ORDER BY historico.id DESC   ;`;
     return database.executar(query);
   }
   
   function getDiscUsage(id) {
-    const query = `SELECT disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
+    const query = `SELECT top(1) disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
     FROM dispositivo AS disp
     JOIN disco ON disp.id = disco.fk_dispositivo 
     JOIN historico ON disp.id = historico.fk_dispositivo
     WHERE historico.fk_dispositivo = ${id} AND historico.fk_tipo_metrica = 3
-    ORDER BY historico.id DESC  LIMIT 1 ;`;
+    ORDER BY historico.id DESC   ;`;
     return database.executar(query);
   }
   
   function getDisc2Usage(id) {
-    const query = `SELECT disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
+    const query = `SELECT top(1) disp.id, disp.memoria_total, disco.tamanho, historico.registro, historico.data_hora
     FROM dispositivo AS disp
     JOIN disco ON disp.id = disco.fk_dispositivo 
     JOIN historico ON disp.id = historico.fk_dispositivo
     WHERE historico.fk_dispositivo = ${id} AND historico.fk_tipo_metrica = 6
-    ORDER BY historico.id DESC LIMIT 1  ;`;
+    ORDER BY historico.id DESC   ;`;
     return database.executar(query);
   }
 
