@@ -118,7 +118,6 @@ async function deletarDipositivo(req, res) {
 module.exports = {
   testar,
   cadastrar,
-  vincularUsuario,
   listar,
   atualizarDispositivo,
   atualizarUpdate,
