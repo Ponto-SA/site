@@ -25,12 +25,11 @@ async function cadastrar(req, res) {
     const idMaquina = response[0].id;
 
     await dispositivoModel.atualizarUpdate(id);
-    await dispositivoModel.vincularUsuario(id,idMaquina);
+    await dispositivoModel.vincularUsuario(id, idMaquina);
 
-res.json({
-  mensagem: "atualizar"
-})
-
+    res.json({
+      mensagem: "atualizar",
+    });
   }
 }
 

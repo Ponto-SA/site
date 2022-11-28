@@ -13,6 +13,7 @@ var usuarioRouter = require("./src-node/routes/usuarios");
 var hardwareRouter = require("./src-node/routes/hardware");
 var dispositivoRouter = require("./src-node/routes/dispositivos");
 var pontoRouter = require("./src-node/routes/ponto");
+var enderecoRouter = require("./src-node/routes/endereco");
 
 
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/dispositivos", dispositivoRouter);
 app.use("/hardware", hardwareRouter);
 app.use("/ponto", pontoRouter);
+app.use("/endereco", enderecoRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n
