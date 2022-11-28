@@ -41,15 +41,17 @@ async function novoEndereco(req, res) {
 }
 
 async function updateEndereco(req, res) {
-  const cep = req.body.cep;
+  const cepBusca = req.body.cep;
+  const cepUpdate = req.body.cepModal;
   const rua = req.body.rua;
   const numero = req.body.numero;
   const bairro = req.body.bairro;
   const cidade = req.body.cidade;
   const uf = req.body.uf;
 
-  const id = await enderecoModel.listarUnicoIdEndereco(cep);
-  await enderecoModel.updateEndereco(id[0].id, rua, numero, bairro, cep, cidade, uf);
+  const id = await enderecoModel.listarUnicoEndereco(cepBusca);
+  console.log(id[0])
+  await enderecoModel.updateEndereco(id[0].id, rua, numero, bairro, cepUpdate, cidade, uf);
 
   res.json({
     mensagem: "Atualizado com sucesso!",
@@ -58,11 +60,13 @@ async function updateEndereco(req, res) {
 
 async function deletarEndereco(req, res) {
   const cep = req.body.cep;
+  enderecoModel.desabilitarFK();
 
   const idEndereco = await enderecoModel.listarUnicoIdEndereco(cep);
 
   await enderecoModel.deleteEndereco(idEndereco[0].id);
 
+  enderecoModel.reabilitarFK();
   res.json({
     mensagem: "Endereço deletado com sucesso",
   });
