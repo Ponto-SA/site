@@ -151,7 +151,7 @@ function modalAtualizarUser(id, nome, sobrenome, email, status) {
 }
 
 function atualizarUser() {
-  modal2.style.display = "none";
+
   const isAtivo = attUserAtivo.checked ? 1 : 0;
   const isGestor = cargoGestorAtt.checked ? true : false;
 
@@ -181,11 +181,11 @@ function atualizarUser() {
         opcao,
         isGestor
       }),
+    }).then((response) => {
+      Swal.fire("Sucesso!", "Usuário atualizado com exito.", "success");
+      listarFuncionarios();
+      modal2.style.display = "none";
     })
-      .then(() => {
-        Swal.fire("Sucesso!", "Usuário atualizado com exito.", "success");
-        listarFuncionarios();
-      })
       .catch((err) => {
         Swal.fire("Error", `${err}`, "error");
       });
@@ -237,6 +237,30 @@ function modalAtualizarDispositivo(hostname, id) {
 function modalAtualizarEndereco(cep) {
   modalEndereco2.style.display = "block";
   cepEmpresa.value = cep;
+
+  fetch("/endereco/listUnico", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+      cep,
+    }),
+  })
+    .then((response) => {
+      response.json().then((dados) => {
+        addRuaUpdate.value = dados.endereco[0].rua;
+        addNumeroUpdate.value = dados.endereco[0].numero;
+        addBairroUpdate.value = dados.endereco[0].bairro;
+        addCepUpdate.value = dados.endereco[0].cep;
+        addCidadeUpdate.value = dados.endereco[0].cidade;
+        addUfUpdate.value = dados.endereco[0].uf;
+      });
+    })
+    .catch((error) => {
+      console.log(`#ERRO: ${error}`);
+    });
 }
 
 function cadastrarUser() {
@@ -267,7 +291,9 @@ function cadastrarUser() {
     })
       .then((res) => {
         res.json().then((dados) => {
-          Swal.fire(`${dados.mensagem}`, "", "success");
+          Swal.fire(`Cadastrado com sucesso !`, "", "success");
+          atualizarUser();
+          modal2.style.display = "none";
         });
       })
       .catch((err) => {
@@ -296,18 +322,17 @@ function atualizarDispositivo() {
       hostName,
       idDispositivo,
     }),
+  }).then((response) => {
+    if (response.ok) {
+      Swal.fire("Dispositivo atualizado com sucesso!", "", "success");
+      modalDispositivo2.style.display = "none";
+      listarDispositivos();
+    } else {
+      response.json().then((dados) => {
+        Swal.fire(`${dados.mensagem}`, "", "error");
+      });
+    }
   })
-    .then((response) => {
-      if (response.ok) {
-        Swal.fire("Dispositivo atualizado com sucesso!", "", "success");
-        modalDispositivo2.style.display = "none";
-        listarDispositivos();
-      } else {
-        response.json().then((dados) => {
-          Swal.fire(`${dados.mensagem}`, "", "error");
-        });
-      }
-    })
     .catch((error) => {
       console.log(`#ERRO: ${error}`);
     });
@@ -464,6 +489,7 @@ function listarDispositivos() {
     response.json().then((dados) => {
       cardsDevices.innerHTML = "";
       dados.forEach((dados) => {
+        console.log(dados)
         cardsDevices.innerHTML += `
                 <div id="cardAcesso">
                     <div id="infoUser">
@@ -533,6 +559,7 @@ function atualizarEndereco() {
   let uf = addUfUpdate.value;
   let cepModal = addCepUpdate.value;
   let cep = cepEmpresa.value;
+
   if (rua.length < 1) {
     Swal.fire("Por favor informe a Rua !");
   } else if (numero.length < 1) {
