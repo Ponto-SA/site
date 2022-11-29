@@ -166,6 +166,7 @@
   }
 
   #container_register img {
+    margin-top: 150px;
     width: 350px;
   }
   
@@ -175,6 +176,10 @@
     padding-top: 0;
     flex-direction: column-reverse;
     overflow: clip;
+  }
+
+  #container_register img{
+    margin-top: 150px;
   }
   
 }
