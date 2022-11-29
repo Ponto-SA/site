@@ -25,12 +25,12 @@ function listarDispositivo(hostname){
 }
 
 function atualizarUpdate(idFuncionario){
-  const query = `update usuario_maquina set ativo = 0 where fk_usuario = ${idFuncionario} and data_hora <= GETDATE();`;
+  const query = `update usuario_maquina set ativo = 0 where fk_usuario = ${idFuncionario} and data_hora <= GETDATE() AND ativo = 1;`;
   return database.executar(query);
 }
 
 function atualizarUpdate2(id){
-  const query = `update usuario_maquina set ativo = 0 where fk_dispositivo = ${id} and data_hora <= GETDATE();`;
+  const query = `update usuario_maquina set ativo = 0 where fk_dispositivo = ${id} and data_hora <= GETDATE() AND ativo = 1;`;
   return database.executar(query);
 }
 
