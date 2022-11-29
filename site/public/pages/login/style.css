@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap-reverse;
   color: #b58fff;
   margin-bottom: 90px;
 }
@@ -73,6 +74,9 @@
   color: #b58fff;
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1000px) {
   
+  .imglogin{
+    margin-top: 0px;
+  }
 }

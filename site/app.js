@@ -4,16 +4,16 @@ process.env.AMBIENTE_PROCESSO = "producao";
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
-var PORTA = 3333;
+var PORTA = 8080;
 
 var app = express();
 
-var indexRouter = require("./src-node/routes/index");
-var usuarioRouter = require("./src-node/routes/usuarios");
-var hardwareRouter = require("./src-node/routes/hardware");
-var dispositivoRouter = require("./src-node/routes/dispositivos");
-var pontoRouter = require("./src-node/routes/ponto");
-var enderecoRouter = require("./src-node/routes/endereco");
+var indexRouter = require("./src/routes/index");
+var usuarioRouter = require("./src/routes/usuarios");
+var hardwareRouter = require("./src/routes/hardware");
+var dispositivoRouter = require("./src/routes/dispositivos");
+var pontoRouter = require("./src/routes/ponto");
+var enderecoRouter = require("./src/routes/endereco");
 
 
 app.use(express.json());
