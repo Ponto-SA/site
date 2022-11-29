@@ -24,7 +24,7 @@ function validEndereco(cep, numero) {
 }
 
 function cadastrarEndereco(rua, numero, bairro, cep, cidade, uf) {
-  const query = `INSERT INTO endereco VALUES (null, '${rua}', '${numero}', '${bairro}', '${cep}', '${cidade}', '${uf}')`;
+  const query = `INSERT INTO endereco (rua, numero, bairro, cep, cidade, uf) VALUES ('${rua}', '${numero}', '${bairro}', '${cep}', '${cidade}', '${uf}')`;
   return database.executar(query);
 }
 

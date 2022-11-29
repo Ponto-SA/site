@@ -3,12 +3,11 @@
   justify-content: space-around;
   align-items: center;
   padding-top: 200px;
-
+  flex-direction: column-reverse;
 }
 
 #container_register img {
   width: 500px;
-  margin: 100px;
 }
 
 #form_register{
