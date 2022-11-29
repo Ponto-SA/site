@@ -115,7 +115,7 @@ async function cadastrar(req, res) {
       const isCadEmpresa = await cadEmpresa(nomeEmpresa, cnpj);
       const buscarEmpresa = await empresaModel.listarEmpresa(cnpj, 2);
 
-      if (isCadUser.affectedRows > 0 && isCadEmpresa.affectedRows > 0) {
+     
         if (!statusEndereco > 0) {
           await cadEndereco(rua, numero, bairro, cep, cidade, uf);
           const buscarEndereco = await empresaModel.validEndereco(cep, numero);
@@ -134,7 +134,7 @@ async function cadastrar(req, res) {
         res.json({
           mensagem: "success",
         });
-      }
+      
     } else {
       res.status(401).json({
         mensagem: "CNPJ ou E-mail já existente.",
@@ -254,7 +254,7 @@ async function cadastrarFuncionario(req, res) {
         mensagem: "Usuário já cadastrado!",
       });
     } else {
-      try {
+     
         await usuarioModel.cadastrarFuncionario(
           idGestor,
           firstname,
@@ -271,12 +271,7 @@ async function cadastrarFuncionario(req, res) {
         res.json({
           mensagem: "Usuário cadastrado com sucesso!",
         });
-      } catch (err) {
-        console.log(err);
-        res.status(500).json({
-          err,
-        });
-      }
+      
     }
   } else {
     res.status(401).json({

@@ -292,8 +292,8 @@ function cadastrarUser() {
       .then((res) => {
         res.json().then((dados) => {
           Swal.fire(`Cadastrado com sucesso !`, "", "success");
-          atualizarUser();
-          modal2.style.display = "none";
+          listarFuncionarios();
+         //modal2.style.display = "none";
         });
       })
       .catch((err) => {
