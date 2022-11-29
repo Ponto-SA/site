@@ -489,7 +489,7 @@ function listarDispositivos() {
     response.json().then((dados) => {
       cardsDevices.innerHTML = "";
       dados.forEach((dados) => {
-        console.log(dados)
+        console.log(dados.id)
         cardsDevices.innerHTML += `
                 <div id="cardAcesso">
                     <div id="infoUser">
@@ -500,7 +500,7 @@ function listarDispositivos() {
                         <p>Funcionario: <span>${dados.nome} ${dados.sobrenome}</span></p>
                     </div>
                         <div id="editUser">
-                            <ion-icon name="create" onclick="modalAtualizarDispositivo( '${dados.host_name}', '${dados.id}'
+                            <ion-icon name="create" onclick="modalAtualizarDispositivo( '${dados.host_name}', '${dados.id[1]}'
                             )"></ion-icon>
                         </div>
                         <div id="editUser">
